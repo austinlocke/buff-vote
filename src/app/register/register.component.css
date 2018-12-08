@@ -1,0 +1,20 @@
+.bf-container {
+    padding-top: 30px;
+}
+
+.form-control {
+    box-shadow: none !important;
+}
+
+.btn-outline-success{
+    border-color: #730A31 !important;
+}
+
+.btn {
+    color: #730A31 !important;
+}
+
+.btn:hover {
+    color: white !important;
+    background-color: #730A31 !important;
+}

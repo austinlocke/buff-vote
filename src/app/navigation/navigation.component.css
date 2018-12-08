@@ -1,0 +1,32 @@
+.btn-outline-success{
+    border-color: #730A31 !important;
+}
+
+.btn {
+    color: #730A31 !important;
+}
+
+.btn:hover {
+    color: white !important;
+    background-color: #730A31 !important;
+}
+
+.navbar-brand {
+    font-size: 1.9em !important
+}
+
+.nav-container {
+    font-family: 'Roboto', 'sans-serif' !important;
+    font-style: italic !important;
+}
+
+.nav-image {
+    width: 1px;
+    height: 1px;
+    max-width: 10px;
+    max-height: 10px;
+}
+
+.form-control {
+    box-shadow: none !important;
+}
