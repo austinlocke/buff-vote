@@ -6,12 +6,14 @@
     box-shadow: none !important;
 }
 
-.btn-outline-success{
-    border-color: #730A31 !important;
+.btn {
+    background-color: transparent !important;
+    color: #730A31 !important;
+    border: 1px solid #730A31 !important;
 }
 
-.btn {
-    color: #730A31 !important;
+.btn:focus {
+    box-shadow: none !important;
 }
 
 .btn:hover {

@@ -14,35 +14,60 @@
     <hr class="my-4">
     <p class="lead">Sign up using your WTAMU buff email address below!</p>
     <hr class="my-4">
-    <form>
+    <form #registerForm="ngForm" (submit)="onRegister(registerForm)">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="fname">First Name</label>
-          <input type="text" class="form-control" id="fname" placeholder="First Name">
+          <input type="text" class="form-control" name="fname" placeholder="First Name" ngModel #fname="ngModel" required>
+          <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
+            <div *ngIf="fname.errors.required">
+              First name is required
+            </div>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label for="lname">Last Name</label>
-          <input type="text" class="form-control" id="lname" placeholder="Last Name">
+          <input type="text" class="form-control" name="lname" placeholder="Last Name" ngModel #lname="ngModel" required>
+          <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
+            <div *ngIf="lname.errors.required">
+              Last name is required
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Email">
+        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            Email is required
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
+        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            Password is required
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-4">
           <label for="confirmpass">Confirm Password</label>
-          <input type="password" class="form-control" id="confirmpass" placeholder="Confirm Password">
+          <input type="password" class="form-control" name="confirmpass" placeholder="Confirm Password" ngModel #confpass="ngModel" required>
+          <div *ngIf="confpass.invalid && (confpass.dirty || confpass.touched)" class="alert alert-danger">
+            <div *ngIf="confpass.errors.required">
+              Must confirm password
+            </div>
+          </div>
       </div>
       </div>
       <div class="form-group">
         <label for="department">College Department</label>
-        <select id="department" class="form-control">
-            <option selected>Choose...</option>
+        <select name="department" class="form-control" ngModel #department="ngModel" required>
+            <option value="" disabled selected>Select your department</option>
             <option value="1">Paul Engler College of Agriculture and Natural Sciences</option>
             <option value="2">Paul and Virginia Engler College of Business</option>
             <option value="3">College of Education and Social Sciences</option>
@@ -52,19 +77,35 @@
             <option value="7">School of Music</option>
             <option value="8">Graduate School</option>
         </select>
+        <div *ngIf="department.invalid && (department.dirty || department.touched)" class="alert alert-danger">
+          <div *ngIf="department.errors.required">
+            Department is required
+          </div>
+        </div>
       </div>
       <div class="form-group">
           <label for="major">College Major</label>
-          <input type="text" class="form-control" id="major" placeholder="Major (ex. Computer Science)">
+          <input type="text" class="form-control" name="major" placeholder="Major (ex. Computer Science)" ngModel #major="ngModel" required>
+          <div *ngIf="major.invalid && (major.dirty || major.touched)" class="alert alert-danger">
+            <div *ngIf="major.errors.required">
+              Major is required
+            </div>
+          </div>
         </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="city">City</label>
-          <input type="text" class="form-control" id="city" placeholder="City">
+          <input type="text" class="form-control" name="city" placeholder="City" ngModel #city="ngModel" required>
+          <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+            <div *ngIf="city.errors.required">
+              City is required
+            </div>
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label for="state">State</label>
-          <select id="state" class="form-control">
+          <select name="state" class="form-control" ngModel #state="ngModel" required>
+            <option value="" disabled selected>Select your state</option>
             <option selected>Choose...</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -118,26 +159,41 @@
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
           </select>
+          <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+            <div *ngIf="state.errors.required">
+              State is required
+            </div>
+          </div>
         </div>
         <div class="form-group col-md-2">
           <label for="zip">Zip</label>
-          <input type="text" class="form-control" id="zip">
+          <input type="text" class="form-control" name="zip" ngModel #zip="ngModel" required placeholder="Zip Code">
+          <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
+            <div *ngIf="zip.errors.required">
+              Zip is required
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="usertype">User Type</label>
-          <select id="usertype" class="form-control">
-            <option selected>Choose...</option>
+          <select name="usertype" class="form-control" ngModel #usertype="ngModel" required>
+            <option value="" disabled selected>Select your User Type</option>
             <option>Student</option>
             <option>Instructor</option>
             <option>Faculty</option>
           </select>
+          <div *ngIf="usertype.invalid && (usertype.dirty || usertype.touched)" class="alert alert-danger">
+            <div *ngIf="usertype.errors.required">
+              User Type is required
+            </div>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label for="classification">Classification</label>
-          <select id="classification" class="form-control">
-            <option selected>Choose...</option>
+          <select name="classification" class="form-control" ngModel #classification="ngModel" required>
+            <option value="" disabled selected>Select your Classification</option>
             <option>Freshman</option>
             <option>Sophomore</option>
             <option>Junior</option>
@@ -145,9 +201,14 @@
             <option>Graduate Student</option>
             <option>N/A</option>
           </select>
+          <div *ngIf="classification.invalid && (classification.dirty || classification.touched)" class="alert alert-danger">
+            <div *ngIf="classification.errors.required">
+              Classification is required
+            </div>
+          </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary btn-outline-success">Register</button>
+      <button type="submit" class="btn">Register</button>
     </form>
   </div>
 </div>

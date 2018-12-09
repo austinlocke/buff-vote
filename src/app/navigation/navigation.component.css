@@ -1,9 +1,11 @@
-.btn-outline-success{
-    border-color: #730A31 !important;
+.btn {
+    background-color: transparent !important;
+    color: #730A31 !important;
+    border: 1px solid #730A31 !important;
 }
 
-.btn {
-    color: #730A31 !important;
+.btn:focus {
+    box-shadow: none !important;
 }
 
 .btn:hover {
@@ -12,7 +14,7 @@
 }
 
 .navbar-brand {
-    font-size: 1.9em !important
+    font-size: 2.1em !important
 }
 
 .nav-container {
@@ -20,11 +22,17 @@
     font-style: italic !important;
 }
 
-.nav-image {
-    width: 1px;
-    height: 1px;
-    max-width: 10px;
-    max-height: 10px;
+.image-container {
+    width: 32px;
+    height: 32px;
+    padding-right: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
 }
 
 .form-control {
