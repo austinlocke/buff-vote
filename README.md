@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Before running the project, ensure you have angular cli downloaded, and then run `npm install` to get the latest dependencies for the project.
+Before running the project, ensure you have NodeJS downloaded, then with npm ensure angular cli is downloaded, and then run `npm install` to get the latest dependencies for the project.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
