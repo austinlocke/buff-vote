@@ -1,4 +1,5 @@
 const User = require('../models/user.model.js');
+const passwordHash = require('password-hash');
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -18,7 +19,7 @@ exports.create = (req, res) => {
     email: req.body.email,
     verified: req.body.verified,
     type_of_user: req.body.type_of_user,
-    hashed_pass: req.body.hashed_pass,
+    hashed_pass: passwordHash.generate(req.body.hashed_pass),
     classification: req.body.classification,
     major: req.body.major,
     department: req.body.department,
@@ -41,8 +42,8 @@ exports.create = (req, res) => {
 // Retrieve and return all user from the database.
 exports.findAll = (req, res) => {
   User.find()
-  .then(user => {
-      res.send(user);
+  .then(users => {
+      res.send(users);
   }).catch(err => {
       res.status(500).send({
           message: err.message || "Some error occurred while retrieving user."

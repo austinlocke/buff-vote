@@ -3,7 +3,7 @@ export interface User {
   lname: String;
   email: String;
   type_of_user: String;
-  hashed_pash: String;
+  password: String;
   classification: String;
   major: String;
   department: String;

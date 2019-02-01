@@ -24,6 +24,7 @@
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "mongoose": "^5.4.8",
+    "password-hash": "^1.2.2",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
