@@ -18,8 +18,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(form: NgForm) {
-    console.log("Form submitted");
-    console.log(form.value);
     const user: User = {
       fname: form.value.fname,
       lname: form.value.lname,

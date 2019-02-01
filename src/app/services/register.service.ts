@@ -8,7 +8,12 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   registerUser(user: User) {
-    this.http.post("http://localhost:3000/api/user", user)
-      .subscribe();
+    return this.http.post("http://localhost:3000/api/user", user)
+      .subscribe(data => {
+        const response: any = data;
+        if (response.status !== 200) {
+          console.log("An error has occured.");
+        }
+      });
   }
 }
