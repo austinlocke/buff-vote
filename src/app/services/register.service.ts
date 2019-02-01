@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { RegisterUser } from './register.model';
+import { RegisterUser } from '../models/register.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: "root" })

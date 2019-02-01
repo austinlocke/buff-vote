@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RegisterService } from './register.service';
-import { RegisterUser } from './register.model';
+import { RegisterService } from '../services/register.service';
+import { RegisterUser } from '../models/register.model';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import { RegisterUser } from './register.model';
 
 export class RegisterComponent implements OnInit {
 
-  constructor(public registerService: RegisterService) { }
+  constructor(private registerService: RegisterService) { }
 
   ngOnInit() {
   }
