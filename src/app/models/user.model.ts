@@ -1,4 +1,4 @@
-export interface RegisterUser {
+export interface User {
   fname: String;
   lname: String;
   email: String;

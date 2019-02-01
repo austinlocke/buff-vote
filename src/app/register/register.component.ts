@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
-import { RegisterUser } from '../models/register.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   onRegister(form: NgForm) {
     console.log("Form submitted");
     console.log(form.value);
-    const user: RegisterUser = {
+    const user: User = {
       fname: form.value.fname,
       lname: form.value.lname,
       email: form.value.email,
