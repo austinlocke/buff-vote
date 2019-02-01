@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ValidateEmailDirective } from './directives/validate-email.directive';
+import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ValidateEmailDirective } from './directives/validate-email.directive';
     RegisterComponent,
     NavigationComponent,
     DashboardComponent,
-    ValidateEmailDirective
+    ValidateEmailDirective,
+    ValidatePasswordsMatchDirective
   ],
   imports: [
     BrowserModule,
