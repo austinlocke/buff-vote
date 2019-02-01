@@ -38,10 +38,13 @@
       <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required>
+        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required appValidateEmail>
         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
           <div *ngIf="email.errors.required">
             Email is required
+          </div>
+          <div *ngIf="email.errors.invalidEmail">
+            Must be a valid wtamu email address.
           </div>
         </div>
       </div>

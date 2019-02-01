@@ -7,7 +7,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) {}
 
-  addPost(user: User) {
+  registerUser(user: User) {
     this.http.post("http://localhost:3000/api/user", user)
       .subscribe();
   }

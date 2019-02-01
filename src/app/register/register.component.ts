@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private registerService: RegisterService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
   }
 
   onRegister(form: NgForm) {
@@ -32,7 +33,11 @@ export class RegisterComponent implements OnInit {
       state: form.value.state,
       zip: form.value.zip
     };
-    this.registerService.addPost(user);
+    this.registerService.registerUser(user);
   }
+
+  log(element) {
+    console.log(element)
+  } 
 
 }

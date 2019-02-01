@@ -8,13 +8,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ValidateEmailDirective } from './directives/validate-email.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     NavigationComponent,
-    DashboardComponent
+    DashboardComponent,
+    ValidateEmailDirective
   ],
   imports: [
     BrowserModule,
