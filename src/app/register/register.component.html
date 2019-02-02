@@ -38,7 +38,7 @@
       <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required email appValidateEmail (click)=log(email)>
+        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required email appValidateEmail>
         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
           <div *ngIf="email.errors.required">
             Email is required
@@ -54,8 +54,7 @@
       <div class="form-group col-md-4">
         <label for="password">Password</label>
         <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required 
-          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,}"
-          (click)="log(password)">
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,}">
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
           <div *ngIf="password.errors.required">
             Password is required
@@ -67,7 +66,7 @@
       </div>
       <div class="form-group col-md-4">
           <label for="confirmpass">Confirm Password</label>
-          <input type="password" class="form-control" name="confirmpass" placeholder="Confirm Password" ngModel #confpass="ngModel" required appValidatePasswordsMatch="{{password.value}}" (click)="log(confpass)">
+          <input type="password" class="form-control" name="confirmpass" placeholder="Confirm Password" ngModel #confpass="ngModel" required appValidatePasswordsMatch="{{password.value}}">
           <div *ngIf="confpass.invalid && (confpass.dirty || confpass.touched)" class="alert alert-danger">
             <div *ngIf="confpass.errors.required">
               Must confirm password

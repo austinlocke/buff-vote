@@ -11,7 +11,6 @@ export class ValidatePasswordsMatchDirective implements Validator {
 
   validate(control: AbstractControl): {[key: string]: any} | null {
     const match = this.password === control.value;
-    console.log(match, this.password, control.value)
     return !match? {"passwordsNotMatch": {value: control.value}} : null;
   }
 }

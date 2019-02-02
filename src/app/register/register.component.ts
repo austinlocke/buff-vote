@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { User } from '../models/user.model';
 
 export class RegisterComponent implements OnInit {
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService,
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -31,7 +33,16 @@ export class RegisterComponent implements OnInit {
       state: form.value.state,
       zip: form.value.zip
     };
-    this.registerService.registerUser(user);
+    this.registerService.registerUser(user)
+      .subscribe(data => {
+        const response: any = data;
+        if (response.status !== 200) {
+          console.log("An error has occured.");
+        }
+        else {
+          this.router.navigate(['/', 'dashboard']);
+        }
+    });
   }
 
   log(element) {
