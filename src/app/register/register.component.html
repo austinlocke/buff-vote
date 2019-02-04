@@ -2,13 +2,13 @@
   <div class="jumbotron">
     <h1 class="display-4">Welcome to BuffVote!</h1>
     <p class="lead">BuffVote is a college voting platform focused
-      on security above all else. BuffVote uses a 
+      on security above all else. BuffVote uses a
       decentralized form of tracking votes so that
       a college election can truly be trusted.
     </p>
     <p class="lead">
-        Users will see eligible polls and elections that 
-        they may participate in once they register and 
+        Users will see eligible polls and elections that
+        they may participate in once they register and
         confirm their account.
       </p>
     <hr class="my-4">
@@ -53,7 +53,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required 
+        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required
           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,}">
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
           <div *ngIf="password.errors.required">

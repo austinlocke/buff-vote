@@ -1,38 +1,42 @@
 const User = require('../models/user.model.js');
-const passwordHash = require('password-hash');
+const bcrypt = require('bcrypt');
 
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
 
-  // Create a User
-  const user = new User({
-    fname: req.body.fname || "Untitle Name",
-    lname: req.body.lname,
-    email: req.body.email,
-    verified: req.body.verified,
-    type_of_user: req.body.type_of_user,
-    hashed_pass: req.body.hashed_pass,
-    classification: req.body.classification,
-    major: req.body.major,
-    department: req.body.department,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zip
-  });
-
-  // Save User in the database
-  user.save()
-  .then(data => {
-    res.status(200).send({
-        status: 200,
-        data: data
-    });
-  }).catch(err => {
-    res.status(500).send({
-        message: err.message || "Some error occurred while creating the User."
-    });
-  });
+  //Hash password using Bcrypt
+  bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+      // Create a User
+      const user = new User({
+        fname: req.body.fname || "Untitle Name",
+        lname: req.body.lname,
+        email: req.body.email,
+        verified: req.body.verified,
+        type_of_user: req.body.type_of_user,
+        hashed_pass: req.body.hash,
+        classification: req.body.classification,
+        major: req.body.major,
+        department: req.body.department,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip
+      });
+      // Save User in the database
+      user.save()
+      .then(data => {
+        res.status(200).send({
+            status: 200,
+            message: 'User created!',
+            data: data
+        });
+      }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the User."
+        });
+      });
+    })
 };
 
 // Retrieve and return all user from the database.

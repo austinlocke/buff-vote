@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { User } from '../models/user.model';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -38,15 +38,14 @@ export class RegisterComponent implements OnInit {
         const response: any = data;
         if (response.status !== 200) {
           console.log("An error has occured.");
-        }
-        else {
+        } else {
           this.router.navigate(['/', 'dashboard']);
         }
     });
   }
 
   log(element) {
-    console.log(element)
-  } 
+    console.log(element);
+  }
 
 }
