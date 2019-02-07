@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RegisterService } from '../services/register.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
@@ -21,8 +20,7 @@ export class RegisterComponent implements OnInit {
     duplicateEmailError: false
   };
 
-  constructor(private registerService: RegisterService,
-              private router: Router,
+  constructor(private router: Router,
               private auth: AuthenticationService) { }
 
   ngOnInit(): void {
