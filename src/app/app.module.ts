@@ -11,13 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ValidateEmailDirective } from './directives/validate-email.directive';
 import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
-<<<<<<< HEAD
-import { ErrorInterceptor } from './services/error-interceptor';
-import { ErrorComponent } from './error/error.component';
-
-=======
 import { AuthenticationService } from './services/authentication.service';
->>>>>>> authentication
 
 @NgModule({
   declarations: [
