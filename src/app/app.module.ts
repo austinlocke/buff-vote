@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,9 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ValidateEmailDirective } from './directives/validate-email.directive';
 import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
+<<<<<<< HEAD
 import { ErrorInterceptor } from './services/error-interceptor';
 import { ErrorComponent } from './error/error.component';
 
+=======
+import { AuthenticationService } from './services/authentication.service';
+>>>>>>> authentication
 
 @NgModule({
   declarations: [
@@ -24,20 +27,16 @@ import { ErrorComponent } from './error/error.component';
     DashboardComponent,
     ValidateEmailDirective,
     ValidatePasswordsMatchDirective,
-    ErrorComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    MatDialogModule
+    HttpClientModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
-  ],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: []
 })
 export class AppModule { }

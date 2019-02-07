@@ -3,16 +3,15 @@
 */
 const express = require('express');
 const bodyParser = require("body-parser");
+const passport = require('passport');
 
-const User = require('./models/user.model');
+require('./models/user.model');
+require('./config/passport');
 
-// create express app
 const app = express();
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// parse requests of content-type - application/json
 app.use(bodyParser.json())
 
 // Configuring the database
@@ -45,6 +44,15 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, OPTIONS"
   );
   next();
+});
+
+app.use(passport.initialize());
+
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.send({message : err.name + ": " + err.message});
+  }
 });
 
 // Require User routes
