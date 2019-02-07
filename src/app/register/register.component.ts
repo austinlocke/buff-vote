@@ -3,6 +3,11 @@ import { NgForm } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
+
+export interface nodeErrors {
+  duplicateEmailError: boolean;
+}
 
 @Component({
   selector: 'app-register',
@@ -12,8 +17,13 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent implements OnInit {
 
+  nodeErrors: nodeErrors = {
+    duplicateEmailError: false
+  };
+
   constructor(private registerService: RegisterService,
-              private router: Router) { }
+              private router: Router,
+              private auth: AuthenticationService) { }
 
   ngOnInit(): void {
 
@@ -33,15 +43,18 @@ export class RegisterComponent implements OnInit {
       state: form.value.state,
       zip: form.value.zip
     };
-    this.registerService.registerUser(user)
-      .subscribe(data => {
-        const response: any = data;
-        if (response.status !== 200) {
-          console.log("An error has occured.");
-        } else {
-          this.router.navigate(['/', 'dashboard']);
+
+    this.auth.register(user)
+      .subscribe( () => {
+        this.router.navigate(['/', 'dashboard']);
+      },
+      errResponse => {
+        console.log(errResponse)
+        let errMessage = errResponse.error.error;
+        if (errMessage.includes("User validation failed: email: Error, expected `email` to be unique.")) {
+          this.nodeErrors.duplicateEmailError = true;
         }
-    });
+      });
   }
 
   log(element) {

@@ -1,42 +1,88 @@
 const User = require('../models/user.model.js');
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const passport = require('passport');
 
-// Create and Save a new User
-exports.create = (req, res) => {
-  // Validate request
-
-  //Hash password using Bcrypt
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      // Create a User
-      const user = new User({
-        fname: req.body.fname || "Untitle Name",
+// Register and Save a new User
+exports.register = (req, res) => {
+    const user = new User({
+        fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
         verified: req.body.verified,
         type_of_user: req.body.type_of_user,
-        hashed_pass: req.body.hash,
         classification: req.body.classification,
         major: req.body.major,
         department: req.body.department,
         city: req.body.city,
         state: req.body.state,
         zip: req.body.zip
-      });
-      // Save User in the database
-      user.save()
-      .then(data => {
+    });
+
+    // Hash and salt password
+    user.setPassword(req.body.password);
+
+    // Save User in the database
+    user.save()
+    .then(data => {
+        const token = user.generateJwt();
         res.status(200).send({
             status: 200,
             message: 'User created!',
-            data: data
+            data: data,
+            token: token
         });
-      }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the User."
+    }).catch(err => {
+        console.log(err)
+        if (err.message.includes("User validation failed: email: Error, expected `email` to be unique.")) {
+            res.status(422).send({
+                error: err.message
+            });
+        } else {
+            res.status(500).send({
+                error: err.message || "Some error occurred while creating the User."
+            });
+        }
+    });
+};
+
+exports.login = (req, res) => {
+    console.log("inside login")
+    passport.authenticate('local', function(err, user, info){
+        var token;
+    
+        // If Passport throws/catches an error
+        if (err) {
+          res.status(404).json(err);
+          return;
+        }
+    
+        // If a user is found
+        if (user) {
+          token = user.generateJwt();
+          res.status(200);
+          res.send({
+            token : token
+          });
+        } else {
+          // If user is not found
+          res.status(401).json(info);
+        }
+      })(req, res);
+};
+
+exports.dashboard = (req, res) => {
+    // If no user ID exists in the JWT return a 401
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message" : "UnauthorizedError: private profile"
         });
-      });
-    })
+    } else {
+        // Otherwise continue
+        User.findById(req.payload._id)
+        .exec(function(err, user) {
+            res.status(200).send(user);
+        });
+    }
 };
 
 // Retrieve and return all user from the database.
@@ -88,7 +134,6 @@ exports.update = (req, res) => {
     email: req.body.email,
     verified: req.body.verified,
     type_of_user: req.body.type_of_user,
-    hashed_pass: req.body.hashed_pass,
     classification: req.body.classification,
     major: req.body.major,
     department: req.body.department,
