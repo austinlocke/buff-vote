@@ -32,7 +32,6 @@ exports.register = (req, res) => {
             token: token
         });
     }).catch(err => {
-        console.log(err)
         if (err.message.includes("User validation failed: email: Error, expected `email` to be unique.")) {
             res.status(422).send({
                 error: err.message
@@ -46,7 +45,6 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-    console.log("inside login")
     passport.authenticate('local', function(err, user, info){
         var token;
     

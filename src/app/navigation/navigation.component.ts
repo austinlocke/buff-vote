@@ -29,12 +29,11 @@ export class NavigationComponent implements OnInit {
 
     this.auth.login(this.credentials)
       .subscribe( (data) => {
-        console.log(data)
         this.router.navigate(['/dashboard']);
       },
       errMessage => {
         console.log(errMessage);
-      });
+    });
   }
 
 }
