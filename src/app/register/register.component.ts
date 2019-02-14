@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
           this.nodeErrors.duplicateEmailError = true;
         }
       });
+    this.auth.sendVerification(user).subscribe();
   }
 
   log(element) {

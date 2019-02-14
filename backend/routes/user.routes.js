@@ -10,6 +10,12 @@ module.exports = (app) => {
   // Create a new user
   app.post('/api/register', user.register);
 
+  // Send Verification Email
+  app.post('/api/verification', user.sendVerificationEmail);
+
+  // Retrieve user confirmation email, to update user verification in database
+  app.get('/api/confirmation/:token', user.updateVerification);
+
   // Login User
   app.post('/api/login', user.login);
 

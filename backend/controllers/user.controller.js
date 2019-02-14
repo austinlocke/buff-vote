@@ -1,6 +1,10 @@
 const User = require('../models/user.model.js');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+
+
 
 // Register and Save a new User
 exports.register = (req, res) => {
@@ -31,6 +35,8 @@ exports.register = (req, res) => {
             data: data,
             token: token
         });
+        //If user is created successfully, then send verification email
+
     }).catch(err => {
         if (err.message.includes("User validation failed: email: Error, expected `email` to be unique.")) {
             res.status(422).send({
@@ -44,16 +50,89 @@ exports.register = (req, res) => {
     });
 };
 
+const EMAIL_SECRET = 'asdf1093KMnzxcvnkljvasdu09123nlasdasdf';
+
+exports.sendVerificationEmail = async (req, res) => {
+  console.log("Inside Test sendVerification after");
+  try {
+
+  const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'buffvote19@gmail.com',
+      pass: 'WTAMU2019@'
+    }
+
+  })
+
+  // async email
+  jwt.sign(
+    {
+      userID: req.params.id,
+      email: req.params.email
+    },
+    EMAIL_SECRET,
+    {
+      expiresIn: '24h',
+    },
+    (err, emailToken) => {
+      const url = `http://localhost:3000/api/confirmation/${emailToken}`;
+
+      var message = {
+        from: 'Buff Vote <noreply@buffvote.com>',
+        to: req.body.email,
+        subject: 'Confirm Email',
+        html: `Please click this link to confirm your email: <a href="${url}">${url},</a>`
+      }
+
+      transporter.sendMail(message, (err, info) => {
+        if (err) {
+          return res.status(400).send({
+            message: "Error: unable to send email"
+          });
+        }else {
+          return res.status(402).send({
+            message: "Message sent: " + info.response
+          })
+        }
+      });
+    }
+  );
+
+  } catch (error) {
+      console.log(error);
+  }
+
+};
+
+exports.updateVerification = (req, res) => {
+    jwt.verify(req.params.token, EMAIL_SECRET, function(err, decoded) {
+      if(err) {
+        res.status(401).send('Error: The verification is invalid or has expired');
+        return;
+      }
+
+      User.updateOne({email:decoded.email}, {$set: {"verified":true}}, function(err, result) {
+        if (err) {
+          res.status(400).send({'error':'Error occurred while updating verification'});
+        }
+        else {
+          res.status(200).send('Your account verification has been updated ' + decoded.email);
+        }
+      });
+    });
+}
+
 exports.login = (req, res) => {
     passport.authenticate('local', function(err, user, info){
         var token;
-    
+
         // If Passport throws/catches an error
         if (err) {
           res.status(404).json(err);
           return;
         }
-    
+
         // If a user is found
         if (user) {
           token = user.generateJwt();

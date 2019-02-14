@@ -71,15 +71,15 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'dashboard', user?: User|Credentials): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'verification'|'register'|'dashboard', user?: User|Credentials): Observable<any> {
     let base;
-  
+
     if (method === 'post') {
       base = this.http.post(`http://localhost:3000/api/${type}`, user);
     } else {
       base = this.http.get(`http://localhost:3000/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
-  
+
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
@@ -88,18 +88,22 @@ export class AuthenticationService {
         return data;
       })
     );
-  
+
     return request;
   }
 
   public register(user: User): Observable<any> {
     return this.request('post', 'register', user);
   }
-  
+
+  public sendVerification(user: User ): Observable<any> {
+    return this.request('post', 'verification', user);
+  }
+
   public login(cred: Credentials): Observable<any> {
     return this.request('post', 'login', cred);
   }
-  
+
   public profile(): Observable<any> {
     return this.request('get', 'dashboard');
   }
