@@ -53,7 +53,6 @@ exports.register = (req, res) => {
 const EMAIL_SECRET = 'asdf1093KMnzxcvnkljvasdu09123nlasdasdf';
 
 exports.sendVerificationEmail = async (req, res) => {
-  console.log("Inside Test sendVerification after");
   try {
 
   const transporter = nodemailer.createTransport({
@@ -68,8 +67,8 @@ exports.sendVerificationEmail = async (req, res) => {
   // async email
   jwt.sign(
     {
-      userID: req.params.id,
-      email: req.params.email
+      userID: req.body.id,
+      email: req.body.email
     },
     EMAIL_SECRET,
     {
@@ -82,16 +81,22 @@ exports.sendVerificationEmail = async (req, res) => {
         from: 'Buff Vote <noreply@buffvote.com>',
         to: req.body.email,
         subject: 'Confirm Email',
-        html: `Please click this link to confirm your email: <a href="${url}">${url},</a>`
+        html: `Hello,<br><br>
+               Please click this link to verify your email: <br>
+               <a href="${url}">${url},</a> <br><br>
+               You're receiving this email because you recently registered for a BuffVote
+               account. <br>
+               If this wasn't you, please ignore this email. <br><br>
+               Thank you,<br>BuffVote`
       }
 
       transporter.sendMail(message, (err, info) => {
         if (err) {
-          return res.status(400).send({
+          return res.status(503).send({
             message: "Error: unable to send email"
           });
         }else {
-          return res.status(402).send({
+          return res.status(200).send({
             message: "Message sent: " + info.response
           })
         }
@@ -108,13 +113,13 @@ exports.sendVerificationEmail = async (req, res) => {
 exports.updateVerification = (req, res) => {
     jwt.verify(req.params.token, EMAIL_SECRET, function(err, decoded) {
       if(err) {
-        res.status(401).send('Error: The verification is invalid or has expired');
+        res.status(422).send('Error: The verification is invalid or has expired');
         return;
       }
 
       User.updateOne({email:decoded.email}, {$set: {"verified":true}}, function(err, result) {
         if (err) {
-          res.status(400).send({'error':'Error occurred while updating verification'});
+          res.status(500).send({'error':'Error occurred while updating verification'});
         }
         else {
           res.status(200).send('Your account verification has been updated ' + decoded.email);

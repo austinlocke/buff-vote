@@ -44,6 +44,7 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(user)
       .subscribe( () => {
+        this.auth.sendVerification(user).subscribe();
         this.router.navigate(['/', 'dashboard']);
       },
       errResponse => {
@@ -53,7 +54,7 @@ export class RegisterComponent implements OnInit {
           this.nodeErrors.duplicateEmailError = true;
         }
       });
-    this.auth.sendVerification(user).subscribe();
+
   }
 
   log(element) {
