@@ -27,6 +27,27 @@
     color: white;
 }
 
+.menuContainer {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background-color: #730A31;
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.menuContainer:hover {
+    background-color: rgb(145, 12, 61);
+    margin-top: 4px;
+}
+
 .subDashContainer {
-    padding-top: 20px;
+    padding-top: 1px;
+}
+
+div.col {
+    padding-left: 0.5px !important;
+    padding-right: 0.5px !important;
 }

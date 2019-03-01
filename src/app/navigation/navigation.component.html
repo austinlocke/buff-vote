@@ -11,9 +11,7 @@
       <button class="btn my-2 my-sm-0" type="submit">Log In</button>
     </form>
     <div *ngIf="auth.isLoggedIn()">
-        <span class="welcomeText my-2" >Welcome!</span>
+        <span class="welcomeText my-2" >Welcome, {{ auth.getUserDetails().fname }}!</span>
         <button class="logoutBtn btn my-2 my-sm-0" (click)="auth.logout()">Log Out</button>
     </div>
-    
-    
 </nav>

@@ -46,3 +46,7 @@
 .welcomeText {
     font-size: 1.5em;
 }
+
+nav.nav-container {
+    background-color: rgb(236, 236, 236) !important;
+}

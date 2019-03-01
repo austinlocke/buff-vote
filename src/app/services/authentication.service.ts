@@ -8,9 +8,11 @@ import { User } from '../models/user.model';
 export interface UserDetails {
   _id: string;
   email: string;
-  name: string;
+  fname: string;
+  lname: string;
   exp: number;
   iat: number;
+  verified: boolean;
 }
 
 export interface Credentials {

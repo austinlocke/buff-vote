@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ValidateEmailDirective } from './directives/validate-email.directive';
 import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
 import { AuthenticationService } from './services/authentication.service';
+import { CreatePollComponent } from './create-poll/create-poll.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthenticationService } from './services/authentication.service';
     DashboardComponent,
     ValidateEmailDirective,
     ValidatePasswordsMatchDirective,
+    CreatePollComponent,
   ],
   imports: [
     BrowserModule,
