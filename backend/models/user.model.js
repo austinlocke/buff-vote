@@ -40,7 +40,8 @@ UserSchema.methods.generateJwt = function() {
     return jwt.sign({
       _id: this._id,
       email: this.email,
-      name: this.name,
+      fname: this.fname,
+      lname: this.lname,
       exp: parseInt(expiry.getTime() / 1000),
     }, "secret_hash");
 };
