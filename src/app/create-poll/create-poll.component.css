@@ -1,7 +1,57 @@
 #title {
     padding-top: 15px;
     width: 100%;
-    font-size: 3em;
+    font-size: 4em;
     font-style: italic;
     text-align: center;
+    color: rgb(110, 110, 110);
+}
+
+.buttonContainer {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.pollContainer {
+    padding-top: 15px;
+}
+
+.createContainer {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.accessText {
+    color: rgb(126, 126, 126)
+}
+
+.smallText {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.form-control {
+    box-shadow: none !important;
+}
+
+.btn {
+    background-color: transparent !important;
+    color: #730A31 !important;
+    border: 1px solid #730A31 !important;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+}
+
+.btn:hover {
+    color: white !important;
+    background-color: #730A31 !important;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active {
+    color: white !important;
+    background-color: #730A31 !important;
 }

@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit {
       .subscribe( () => {
         this.auth.sendVerification(user).subscribe();
         this.router.navigate(['/', 'dashboard']);
+        console.log(this.auth.getUserDetails().verified);
       },
       errResponse => {
         console.log(errResponse)

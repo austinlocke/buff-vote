@@ -1,5 +1,5 @@
 <div class="dashboardContainer">
-    <div *ngIf="auth.getUserDetails().verified" class="alertContainer">Your account has been registered, please check email to verify account.</div>
+    <div *ngIf="!auth.getUserDetails().verified" class="alertContainer">Your account has been registered, please check email to verify account.</div>
     <div class="subDashContainer">
       <div class="row">
         <div class="col">
