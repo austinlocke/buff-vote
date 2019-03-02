@@ -57,5 +57,7 @@ app.use(function (err, req, res, next) {
 
 // Require User routes
 require('./routes/user.routes.js')(app);
+// Require Poll routes
+require('./routes/poll.routes.js')(app);
 
 module.exports = app;

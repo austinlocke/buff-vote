@@ -35,7 +35,6 @@ exports.register = (req, res) => {
             data: data,
             token: token
         });
-        //If user is created successfully, then send verification email
 
     }).catch(err => {
         if (err.message.includes("User validation failed: email: Error, expected `email` to be unique.")) {
