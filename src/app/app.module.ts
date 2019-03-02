@@ -13,6 +13,7 @@ import { ValidateEmailDirective } from './directives/validate-email.directive';
 import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
 import { AuthenticationService } from './services/authentication.service';
 import { CreatePollComponent } from './create-poll/create-poll.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CreatePollComponent } from './create-poll/create-poll.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],

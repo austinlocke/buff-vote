@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 import { Poll } from '../models/poll.model';
 import { PollService } from '../services/poll.service';
-import { ConditionalExpr } from '@angular/compiler';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-create-poll',
@@ -13,7 +15,8 @@ export class CreatePollComponent implements OnInit {
 
   activePage = 1;
 
-  constructor(private pollService: PollService ) { }
+  constructor(private pollService: PollService,
+              private authService: AuthenticationService ) { }
 
   ngOnInit() {
   }
@@ -40,7 +43,7 @@ export class CreatePollComponent implements OnInit {
 
     const poll: Poll = {
       title: form.value.pollName,
-      owner: "test", // need to get user email. Either do this here or in back end.
+      owner: this.authService.getUserDetails().email, // need to get user email. Either do this here or in back end.
       access_type: {
         student: form.value.student || false,
         faculty: form.value.faculty || false,
