@@ -12,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class CreatePollComponent implements OnInit {
 
-  activePage = 1;
+  activePage = 0;
   // Set DatePicker minimum date to todays date
   now: Date = new Date();
   // minDate = {year: 2019, month: 3, day: 15};
@@ -30,10 +30,10 @@ export class CreatePollComponent implements OnInit {
     console.log(form);
 
     const currentDate: Date = new Date();
-    const year = form.value.dp.year;
+    const year = form.value.dateModel.year;
     // Months start with 0 to 11
-    const month = form.value.dp.month - 1;
-    const day = form.value.dp.day;
+    const month = form.value.dateModel.month - 1;
+    const day = form.value.dateModel.day;
     const endDate = new Date(year, month, day);
 
     const poll: Poll = {

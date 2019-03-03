@@ -1,10 +1,10 @@
 #title {
     padding-top: 15px;
     width: 100%;
-    font-size: 4em;
     font-style: italic;
+    font-size: 3em;
     text-align: center;
-    color: rgb(110, 110, 110);
+    color: rgb(85, 85, 85);
 }
 
 .buttonContainer {
@@ -54,4 +54,16 @@
 .btn-secondary:not(:disabled):not(.disabled).active {
     color: white !important;
     background-color: #730A31 !important;
+}
+
+.nextBtn {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+.navButtons {
+    padding-top: 15px;
 }
