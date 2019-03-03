@@ -39,7 +39,7 @@
         <div class="form-group">
           <div class="input-group">
             <input class="form-control" placeholder="End Date for Poll/Election"
-                   name="dp" ngModel ngbDatepicker #date="ngModel" #dp="ngbDatepicker">
+                   name="dp" ngModel ngbDatepicker #date="ngModel" #dp="ngbDatepicker" [minDate]="minDate">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">Choose Date</button>
             </div>

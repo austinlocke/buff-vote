@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 import { Poll } from '../models/poll.model';
 import { PollService } from '../services/poll.service';
@@ -14,6 +13,12 @@ import { AuthenticationService } from '../services/authentication.service';
 export class CreatePollComponent implements OnInit {
 
   activePage = 1;
+  // Set DatePicker minimum date to todays date
+  now: Date = new Date();
+  // minDate = {year: 2019, month: 3, day: 15};
+  minDate = {year: this.now.getFullYear(),
+             month: this.now.getMonth() + 1,
+             day: this.now.getDate()};
 
   constructor(private pollService: PollService,
               private authService: AuthenticationService ) { }
@@ -25,25 +30,15 @@ export class CreatePollComponent implements OnInit {
     console.log(form);
 
     const currentDate: Date = new Date();
-    let endDate = new Date();
-    switch(form.value.duration) {
-      case '1':
-        endDate.setDate(currentDate.getDate() + 1);
-        break;
-      case '2':
-        endDate.setDate(currentDate.getDate() + 7);
-        break;
-      case '3':
-        endDate.setDate(currentDate.getDate() + 14);
-        break;
-      case '4':
-        endDate.setMonth(currentDate.getMonth() + 1);
-        break;
-    }
+    const year = form.value.dp.year;
+    // Months start with 0 to 11
+    const month = form.value.dp.month - 1;
+    const day = form.value.dp.day;
+    const endDate = new Date(year, month, day);
 
     const poll: Poll = {
       title: form.value.pollName,
-      owner: this.authService.getUserDetails().email, // need to get user email. Either do this here or in back end.
+      owner: this.authService.getUserDetails().email,
       access_type: {
         student: form.value.student || false,
         faculty: form.value.faculty || false,
@@ -54,6 +49,5 @@ export class CreatePollComponent implements OnInit {
     };
 
     this.pollService.createPoll(poll).subscribe();
-
   }
 }
