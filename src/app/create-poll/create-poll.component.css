@@ -4,7 +4,7 @@
     font-style: italic;
     font-size: 3em;
     text-align: center;
-    color: rgb(110, 110, 110);
+    color: rgb(85, 85, 85);
 }
 
 .buttonContainer {
@@ -64,7 +64,6 @@
     display: none;
 }
 
-div.jumbotron {
-    min-height: 500px !important;
-    position: relative !important;
+.navButtons {
+    padding-top: 15px;
 }

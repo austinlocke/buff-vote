@@ -47,10 +47,18 @@
             </div>
           </div>
         </div>
-        <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page2">
-
+        <div [ngClass]="activePage !== 1 ? 'hide' : 'none'" class="page2">
+          <div class="form-group">
+            <input type="text" class="form-control" name="questionName" placeholder="Enter Question" ngModel #questionName="ngModel" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="option" placeholder="Enter Option 1" ngModel #option1="ngModel" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="option" placeholder="Enter Option 2" ngModel #option2="ngModel" required>
+          </div>
         </div>
-        <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page3">
+        <div [ngClass]="activePage !== 2 ? 'hide' : 'none'" class="page3">
 
         </div>
       </form>  
