@@ -2,51 +2,62 @@
 
 <div class="container bf-container pollContainer">
   <div class="jumbotron">
-      <div id="title">Create a Poll/Election</div>
+      <h1 id="title"><strong>Create a Poll/Election</strong></h1>
       <div class="buttonContainer">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary" [ngClass]="activePage == 0 ? 'active' : 'none'">
+            <input type="radio" name="options" id="option1" autocomplete="off" (click)="activePage=0"> 1
+          </label>
           <label class="btn btn-secondary" [ngClass]="activePage == 1 ? 'active' : 'none'">
-            <input type="radio" name="options" id="option1" autocomplete="off" (click)="activePage=1"> 1
+            <input type="radio" name="options" id="option2" autocomplete="off" (click)="activePage=1"> 2
           </label>
           <label class="btn btn-secondary" [ngClass]="activePage == 2 ? 'active' : 'none'">
-            <input type="radio" name="options" id="option2" autocomplete="off" (click)="activePage=2"> 2
-          </label>
-          <label class="btn btn-secondary" [ngClass]="activePage == 3 ? 'active' : 'none'">
-            <input type="radio" name="options" id="option3" autocomplete="off" (click)="activePage=3"> 3
+            <input type="radio" name="options" id="option3" autocomplete="off" (click)="activePage=2"> 3
           </label>
         </div>
       </div>
     <div class="createContainer">
-      <form #pollForm="ngForm" (submit)="registerPoll(pollForm)">
-        <div class="form-group">
-          <input type="text" class="form-control" name="pollName" placeholder="Enter Poll Name" ngModel #pollName="ngModel" required>
-        </div>
-        <div class="form-group accessText">
-          <span class="smallText">Access to poll: </span>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="student" type="checkbox" id="student" value="student" ngModel #faculty="ngModel">
-            <label class="form-check-label" for="student">Student</label>
+      <form #pollForm="ngForm">
+        <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page1">
+          <div class="form-group">
+            <input type="text" class="form-control" name="pollName" placeholder="Enter Poll Name" ngModel #pollName="ngModel" required>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="faculty" type="checkbox" id="faculty" value="faculty" ngModel #faculty="ngModel">
-            <label class="form-check-label" for="faculty">Faculty</label>
+          <div class="form-group accessText">
+            <span class="smallText">Access to poll: </span>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="student" type="checkbox" id="student" value="student" ngModel #faculty="ngModel">
+              <label class="form-check-label" for="student">Student</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="faculty" type="checkbox" id="faculty" value="faculty" ngModel #faculty="ngModel">
+              <label class="form-check-label" for="faculty">Faculty</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="instructor" type="checkbox" id="instructor" value="instructor" ngModel #faculty="ngModel">
+              <label class="form-check-label" for="instructor">Instructor</label>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" name="instructor" type="checkbox" id="instructor" value="instructor" ngModel #faculty="ngModel">
-            <label class="form-check-label" for="instructor">Instructor</label>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="End Date for Poll/Election"
-                   name="dp" ngModel ngbDatepicker #date="ngModel" #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">Choose Date</button>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="End Date for Poll/Election"
+                      name="dateModel" ngModel ngbDatepicker #dateModel="ngModel" #date="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="date.toggle()" type="button">Choose Date</button>
+              </div>
             </div>
           </div>
         </div>
-        <button type="submit" class="btn" [disabled]="pollForm.invalid">Create Poll</button>
-      </form>
+        <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page2">
+
+        </div>
+        <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page3">
+
+        </div>
+      </form>  
+      <div class="navButtons">
+        <button type="submit" class="btn" [disabled]="pollForm.invalid" (click)="registerPoll(pollForm)">Create Poll</button>
+        <button class="btn nextBtn" (click)="activePage=(activePage + 1)%3">Next</button>
+      </div>
     </div>
   </div>
 </div>

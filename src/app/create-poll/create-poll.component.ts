@@ -13,7 +13,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class CreatePollComponent implements OnInit {
 
-  activePage = 1;
+  activePage = 0;
 
   constructor(private pollService: PollService,
               private authService: AuthenticationService ) { }
