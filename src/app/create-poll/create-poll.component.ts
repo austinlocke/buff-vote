@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 
 import { Poll } from '../models/poll.model';
 import { PollService } from '../services/poll.service';
@@ -16,24 +16,38 @@ export class CreatePollComponent implements OnInit {
   // Set DatePicker minimum date to todays date
   now: Date = new Date();
   // minDate = {year: 2019, month: 3, day: 15};
-  minDate = {year: this.now.getFullYear(),
-             month: this.now.getMonth() + 1,
-             day: this.now.getDate()};
+  minDate = {
+    year: this.now.getFullYear(),
+    month: this.now.getMonth() + 1,
+    day: this.now.getDate()
+  };
+  pollForm: FormGroup;
+  questions: FormArray;
 
   constructor(private pollService: PollService,
-              private authService: AuthenticationService ) { }
+              private authService: AuthenticationService,
+              private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
+    this.pollForm = this.formBuilder.group({
+      pollName: "",
+      studentAccess: "",
+      facultyAccess: "",
+      instructorAccess: "",
+      endDate: this.minDate,
+      questions: this.formBuilder.array([ this.createQuestion() ])
+    });
   }
 
   registerPoll(form: NgForm) {
     console.log(form);
 
     const currentDate: Date = new Date();
-    const year = form.value.dateModel.year;
+    const year = form.value.endDate.year;
+    
     // Months start with 0 to 11
-    const month = form.value.dateModel.month - 1;
-    const day = form.value.dateModel.day;
+    const month = form.value.endDate.month - 1;
+    const day = form.value.endDate.day;
     const endDate = new Date(year, month, day);
 
     const poll: Poll = {
@@ -49,5 +63,28 @@ export class CreatePollComponent implements OnInit {
     };
 
     this.pollService.createPoll(poll).subscribe();
+  }
+
+  createQuestion() {
+    return this.formBuilder.group({
+      questionTitle: '',
+      options: this.formBuilder.array(["", ""])
+    });
+  }
+
+  addQuestion(): void {
+    this.questions = this.pollForm.get('questions') as FormArray;
+    this.questions.push(this.createQuestion());
+  }
+
+  addOption(questionIndex: number): void {
+    const questions = this.pollForm.get('questions') as FormArray;
+    const question = questions.controls[questionIndex] as FormGroup;
+    const options = question.controls.options as FormArray;
+    options.push( this.formBuilder.control(""));
+  }
+
+  log(element) {
+    console.log(element);
   }
 }

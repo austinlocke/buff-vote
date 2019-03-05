@@ -17,30 +17,30 @@
         </div>
       </div>
     <div class="createContainer">
-      <form #pollForm="ngForm">
+      <form [formGroup]="pollForm">
         <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page1">
           <div class="form-group">
-            <input type="text" class="form-control" name="pollName" placeholder="Enter Poll Name" ngModel #pollName="ngModel" required>
+            <input formControlName="pollName" type="text" class="form-control" placeholder="Enter Poll Name">
           </div>
           <div class="form-group accessText">
             <span class="smallText">Access to poll: </span>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" name="student" type="checkbox" id="student" value="student" ngModel #faculty="ngModel">
+              <input formControlName="studentAccess" class="form-check-input" type="checkbox" id="student" value="student">
               <label class="form-check-label" for="student">Student</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" name="faculty" type="checkbox" id="faculty" value="faculty" ngModel #faculty="ngModel">
+              <input formControlName="facultyAccess" class="form-check-input" name="faculty" type="checkbox" id="faculty" value="faculty">
               <label class="form-check-label" for="faculty">Faculty</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" name="instructor" type="checkbox" id="instructor" value="instructor" ngModel #faculty="ngModel">
+              <input formControlName="instructorAccess" class="form-check-input" name="instructor" type="checkbox" id="instructor" value="instructor">
               <label class="form-check-label" for="instructor">Instructor</label>
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input class="form-control" placeholder="End Date for Poll/Election"
-                      name="dateModel" ngModel ngbDatepicker #dateModel="ngModel" #date="ngbDatepicker" [minDate]="minDate">
+              <input formControlName="endDate" class="form-control" placeholder="End Date for Poll/Election"
+                     ngbDatepicker #date="ngbDatepicker" [minDate]="minDate" required>
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary calendar" (click)="date.toggle()" type="button">Choose Date</button>
               </div>
@@ -48,14 +48,25 @@
           </div>
         </div>
         <div [ngClass]="activePage !== 1 ? 'hide' : 'none'" class="page2">
-          <div class="form-group">
-            <input type="text" class="form-control" name="questionName" placeholder="Enter Question" ngModel #questionName="ngModel" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="option" placeholder="Enter Option 1" ngModel #option1="ngModel" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="option" placeholder="Enter Option 2" ngModel #option2="ngModel" required>
+          <div class="questionBtnContainer">
+            <button class="btn btn-sm" (click)="addQuestion()">Add Question</button>
+          </div> 
+          <div class="form-group" formArrayName="questions"
+            *ngFor="let question of pollForm.get('questions').controls; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-group">
+                <input class="form-control" type="text" formControlName="questionTitle" placeholder="Enter Question">
+              </div>
+              <div class="form-group" formArrayName="options"
+                *ngFor="let option of question.controls.options.controls; let j = index;">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Enter Option {{j+1}}">
+                </div>
+              </div>
+              <div class="optionBtnContainer">
+                <button class="btn btn-sm" (click)="addOption(i)">Add Option</button>
+              </div>
+            </div>
           </div>
         </div>
         <div [ngClass]="activePage !== 2 ? 'hide' : 'none'" class="page3">

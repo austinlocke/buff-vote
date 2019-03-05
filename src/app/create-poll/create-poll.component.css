@@ -9,9 +9,10 @@
 
 .buttonContainer {
     padding-top: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     width: 100%;
     text-align: center;
+    cursor: pointer;
 }
 
 .pollContainer {
@@ -66,4 +67,21 @@
 
 .navButtons {
     padding-top: 15px;
+}
+
+.page2 {
+    padding-bottom: 40px;
+}
+
+.questionBtnContainer {
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.optionBtnContainer {
+    text-align: center;
+}
+
+.opt-btn {
+    float: right;
 }
