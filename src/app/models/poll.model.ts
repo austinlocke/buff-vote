@@ -6,6 +6,12 @@ export interface Poll {
     faculty: Boolean,
     instructor: Boolean
   };
+  questions: [{
+    questionTitle: String,
+    options: [{
+      option: String
+    }]
+  }];
   date_created: Date;
   end_date: Date;
 }

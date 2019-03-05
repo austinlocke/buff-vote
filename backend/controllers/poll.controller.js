@@ -11,6 +11,7 @@ exports.createPoll = (req, res) => {
         faculty: req.body.access_type.faculty || false,
         instructor: req.body.access_type.instructor || false
       },
+      questions: req.body.questions,
       date_created: req.body.date_created,
       end_date: req.body.end_date,
   });

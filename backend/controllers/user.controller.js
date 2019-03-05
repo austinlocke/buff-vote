@@ -121,7 +121,8 @@ exports.updateVerification = (req, res) => {
           res.status(500).send({'error':'Error occurred while updating verification'});
         }
         else {
-          res.status(200).send('Your account verification has been updated ' + decoded.email);
+          res.status(200)// .send('Your account verification has been updated ' + decoded.email);
+             .redirect("http://localhost:4200/dashboard");
         }
       });
     });

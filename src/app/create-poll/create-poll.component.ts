@@ -44,12 +44,11 @@ export class CreatePollComponent implements OnInit {
 
     const currentDate: Date = new Date();
     const year = form.value.endDate.year;
-    
+
     // Months start with 0 to 11
     const month = form.value.endDate.month - 1;
     const day = form.value.endDate.day;
     const endDate = new Date(year, month, day);
-
     const poll: Poll = {
       title: form.value.pollName,
       owner: this.authService.getUserDetails().email,
@@ -58,6 +57,7 @@ export class CreatePollComponent implements OnInit {
         faculty: form.value.faculty || false,
         instructor: form.value.instructor || false
       },
+      questions: form.value.questions,
       date_created: currentDate,
       end_date: endDate
     };

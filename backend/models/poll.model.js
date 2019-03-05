@@ -8,6 +8,12 @@ const PollSchema = mongoose.Schema({
     faculty: { type: Boolean, default: false },
     instructor: { type: Boolean, default: false }
   },
+  questions: [{
+    questionTitle: String,
+    options: [ {
+      option: String
+    }]
+  }],
   date_created: Date,
   end_date: Date
 }, {
