@@ -58,9 +58,11 @@
                 <input class="form-control" type="text" formControlName="questionTitle" placeholder="Enter Question">
               </div>
               <div class="form-group" formArrayName="options"
-                *ngFor="let option of question.controls.options.controls; let j = index;">
+                *ngFor="let op of question.controls.options.controls; let j = index;">
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Enter Option {{j+1}}">
+                  <div [formGroupName]="j">
+                    <input class="form-control" type="text" formControlName="option" placeholder="Enter Option {{j+1}}">
+                  </div>
                 </div>
               </div>
               <div class="optionBtnContainer">

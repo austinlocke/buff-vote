@@ -31,9 +31,9 @@ export class CreatePollComponent implements OnInit {
   ngOnInit() {
     this.pollForm = this.formBuilder.group({
       pollName: "",
-      studentAccess: "",
-      facultyAccess: "",
-      instructorAccess: "",
+      studentAccess: false,
+      facultyAccess: false,
+      instructorAccess: false,
       endDate: this.minDate,
       questions: this.formBuilder.array([ this.createQuestion() ])
     });
@@ -68,7 +68,13 @@ export class CreatePollComponent implements OnInit {
   createQuestion() {
     return this.formBuilder.group({
       questionTitle: '',
-      options: this.formBuilder.array(["", ""])
+      options: this.formBuilder.array([this.createOption(), this.createOption()])
+    });
+  }
+
+  createOption() {
+    return this.formBuilder.group({
+      option: this.formBuilder.control("")
     });
   }
 
@@ -81,7 +87,7 @@ export class CreatePollComponent implements OnInit {
     const questions = this.pollForm.get('questions') as FormArray;
     const question = questions.controls[questionIndex] as FormGroup;
     const options = question.controls.options as FormArray;
-    options.push( this.formBuilder.control(""));
+    options.push(this.createOption());
   }
 
   log(element) {
