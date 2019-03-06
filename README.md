@@ -5,6 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## OpenChain Example Project Repo
 https://github.com/bellapavita/VotingApp
 
+## Screenshots
+Located in /screenshots in root directory of project.
+
 ## Development server
 
 Before running the project, ensure you have Node.js downloaded, then with the npm command line tool ensure you have the angular-cli tool by running `npm install -g @angular/cli`, then run `npm install` (inside the project directory) to get the latest dependencies for the project.
