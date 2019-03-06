@@ -90,7 +90,23 @@ export class CreatePollComponent implements OnInit {
     options.push(this.createOption());
   }
 
-  log(element) {
-    console.log(element);
+  getDate() {
+    const year = this.pollForm.value.endDate.year;
+    const month = this.pollForm.value.endDate.month - 1;
+    const day = this.pollForm.value.endDate.day;
+    const endDate = new Date(year, month, day);
+    return endDate.toLocaleDateString();
+  }
+
+  getStudentAccess() {
+    return this.pollForm.value.studentAccess ? "yes" : "no";
+  }
+
+  getFacultyAccess() {
+    return this.pollForm.value.facultyAccess ? "yes" : "no";
+  }
+
+  getInstructorAccess() {
+    return this.pollForm.value.instructorAccess ? "yes" : "no";
   }
 }

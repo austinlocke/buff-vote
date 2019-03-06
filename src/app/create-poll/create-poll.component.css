@@ -77,10 +77,14 @@
     text-align: center;
 }
 
-.optionBtnContainer {
+.opt-btn {
+    float: right;
+}
+
+.center {
     text-align: center;
 }
 
-.opt-btn {
-    float: right;
+.underline {
+    text-decoration: underline;
 }

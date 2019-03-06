@@ -65,14 +65,28 @@
                   </div>
                 </div>
               </div>
-              <div class="optionBtnContainer">
+              <div class="center">
                 <button class="btn btn-sm" (click)="addOption(i)">Add Option</button>
               </div>
             </div>
           </div>
         </div>
         <div [ngClass]="activePage !== 2 ? 'hide' : 'none'" class="page3">
-
+          <h5 class="underline">Confim Your Poll/Election</h5>
+          <br>
+          <p>Poll Name: {{pollForm.value.pollName}}</p>
+          <p>Student Access: {{getStudentAccess() | titlecase}}</p>
+          <p>Faculty Access: {{getFacultyAccess() | titlecase}}</p>
+          <p>Instructor Access: {{getInstructorAccess() | titlecase}}</p>
+          <p>End Date: {{getDate()}}</p>
+          <br>
+          <div *ngFor="let question of pollForm.value.questions; let i = index;">
+            <p>Question {{i + 1}}: {{question.questionTitle}}</p>
+            <p *ngFor="let option of question.options; let j = index;">
+              Option {{j + 1}}: {{option.option}}
+            </p>
+          </div>
+          <br>
         </div>
       </form>
       <div class="navButtons">
