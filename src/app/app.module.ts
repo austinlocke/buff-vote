@@ -9,11 +9,15 @@ import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ValidateEmailDirective } from './directives/validate-email.directive';
 import { ValidatePasswordsMatchDirective } from './directives/validate-passwords-match.directive';
 import { AuthenticationService } from './services/authentication.service';
+import { PollService } from './services/poll.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { CreatePollComponent } from './create-poll/create-poll.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GuardsCheckEnd } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     NavigationComponent,
     DashboardComponent,
+    VerifyEmailComponent,
     ValidateEmailDirective,
     ValidatePasswordsMatchDirective,
     CreatePollComponent,
@@ -34,7 +39,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    PollService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent],
   entryComponents: []
 })

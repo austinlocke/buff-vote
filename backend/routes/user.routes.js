@@ -22,15 +22,15 @@ module.exports = (app) => {
   app.get('/api/dashboard', auth, user.dashboard);
 
   // Retrieve all user
-  app.get('/api/user', user.findAll);
+  app.get('/api/user', user.findAllUser);
 
   // Retrieve a single user with userId
-  app.get('/api/user/:userId', user.findOne);
+  app.get('/api/user/:userId', user.findOneUser);
 
   // Update a User with userId
-  app.put('/api/user/:userId', user.update);
+  app.put('/api/user/:userId', user.updateUser);
 
   // Delete a User with userId
-  app.delete('/api/user/:userId', user.delete);
+  app.delete('/api/user/:userId', user.deleteUser);
 };
 

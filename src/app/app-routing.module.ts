@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatePollComponent } from './create-poll/create-poll.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: '', 
+    path: '',
     component: RegisterComponent
   },
   {
@@ -15,11 +17,23 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-poll',
-    component: CreatePollComponent
+    component: CreatePollComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'verify-email',
+    component: VerifyEmailComponent,
+    canActivate: [AuthGuard],
+    data: { path : "/verify-email" }
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

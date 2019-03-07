@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { HttpParams } from '@angular/common/http';
 
 export interface nodeErrors {
   duplicateEmailError: boolean;
@@ -24,7 +25,12 @@ export class RegisterComponent implements OnInit {
               private auth: AuthenticationService) { }
 
   ngOnInit(): void {
-
+    if (this.auth.isLoggedIn()) {
+      if (!this.auth.getUserDetails().verified) {
+        this.auth.logout();
+      }
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   onRegister(form: NgForm) {
@@ -44,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(user)
       .subscribe( () => {
-        this.auth.sendVerification(user).subscribe();
+        this.auth.sendVerification(this.auth.getUserDetails()).subscribe();
         this.router.navigate(['/', 'dashboard']);
         console.log(this.auth.getUserDetails().verified);
       },

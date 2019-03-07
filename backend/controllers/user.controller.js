@@ -77,12 +77,12 @@ exports.sendVerificationEmail = async (req, res) => {
       const url = `http://localhost:3000/api/confirmation/${emailToken}`;
 
       var message = {
-        from: 'Buff Vote <noreply@buffvote.com>',
+        from: 'BuffVote <noreply@buffvote.com>',
         to: req.body.email,
         subject: 'Confirm Email',
         html: `Hello,<br><br>
                Please click this link to verify your email: <br>
-               <a href="${url}">${url},</a> <br><br>
+               <a href="${url}">${url}</a> <br><br>
                You're receiving this email because you recently registered for a BuffVote
                account. <br>
                If this wasn't you, please ignore this email. <br><br>
@@ -122,7 +122,7 @@ exports.updateVerification = (req, res) => {
         }
         else {
           res.status(200)// .send('Your account verification has been updated ' + decoded.email);
-             .redirect("http://localhost:4200/dashboard");
+             .redirect("http://localhost:4200/");
         }
       });
     });
@@ -168,7 +168,7 @@ exports.dashboard = (req, res) => {
 };
 
 // Retrieve and return all user from the database.
-exports.findAll = (req, res) => {
+exports.findAllUser = (req, res) => {
   User.find()
   .then(users => {
       res.send(users);
@@ -180,7 +180,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single user with a userId
-exports.findOne = (req, res) => {
+exports.findOneUser = (req, res) => {
   User.findById(req.params.userId)
   .then(user => {
       if(!user) {
@@ -202,7 +202,7 @@ exports.findOne = (req, res) => {
 };
 
 // Update a user identified by the userId in the request
-exports.update = (req, res) => {
+exports.updateUser = (req, res) => {
   // Validate Request
   if(!req.body.email) {
       return res.status(400).send({
@@ -241,7 +241,7 @@ exports.update = (req, res) => {
 };
 
 // Delete a user with the specified userId in the request
-exports.delete = (req, res) => {
+exports.deleteUser = (req, res) => {
   User.findByIdAndRemove(req.params.userId)
   .then(user => {
       if(!user) {

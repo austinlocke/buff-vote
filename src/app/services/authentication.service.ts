@@ -68,12 +68,12 @@ export class AuthenticationService {
     const user = this.getUserDetails();
     if (user) {
       return user.exp > Date.now() / 1000;
-    } else {
-      return false;
     }
+    return false;
   }
 
-  private request(method: 'post'|'get', type: 'login'|'verification'|'register'|'dashboard', user?: User|Credentials): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'verification'|'register'|'dashboard',
+                    user?: User|Credentials|UserDetails): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -98,8 +98,8 @@ export class AuthenticationService {
     return this.request('post', 'register', user);
   }
 
-  public sendVerification(user: User ): Observable<any> {
-    return this.request('post', 'verification', user);
+  public sendVerification(userDetails: UserDetails ): Observable<any> {
+    return this.request('post', 'verification', userDetails);
   }
 
   public login(cred: Credentials): Observable<any> {
