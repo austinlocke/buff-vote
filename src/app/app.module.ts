@@ -18,6 +18,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { CreatePollComponent } from './create-poll/create-poll.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuardsCheckEnd } from '@angular/router';
+import { ViewPollComponent } from './view-poll/view-poll.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { GuardsCheckEnd } from '@angular/router';
     ValidateEmailDirective,
     ValidatePasswordsMatchDirective,
     CreatePollComponent,
+    ViewPollComponent,
   ],
   imports: [
     BrowserModule,

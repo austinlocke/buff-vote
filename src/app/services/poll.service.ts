@@ -31,13 +31,13 @@ export class PollService {
     return this.token;
   }
 
-  private request(method: 'post'|'get', type: 'createPoll', poll?: Poll): Observable<any> {
+  private request(method: 'post'|'get', type: 'createPoll' | 'findAllPoll', poll?: Poll): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(`http://localhost:3000/api/${type}`, poll);
     } else {
-      base = this.http.get(`http://localhost:3000/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`http://localhost:3000/api/${type}`); //{ headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
@@ -54,5 +54,9 @@ export class PollService {
 
   public createPoll(poll: Poll): Observable<any> {
     return this.request('post', 'createPoll', poll);
+  }
+
+  public getPolls(): Observable<any> {
+    return this.request('get', 'findAllPoll');
   }
 }

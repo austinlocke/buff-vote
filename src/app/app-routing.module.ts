@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatePollComponent } from './create-poll/create-poll.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { ViewPollComponent } from './view-poll/view-poll.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'create-poll',
     component: CreatePollComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'view-polls',
+    component: ViewPollComponent,
     canActivate: [AuthGuard]
   },
   {

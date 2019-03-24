@@ -6,9 +6,12 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     <form *ngIf="!auth.isLoggedIn()" class="form-inline my-2 my-lg-0" #loginForm="ngForm" (submit)="login(loginForm)">
-      <input class="form-control mr-sm-2" type="text" placeholder="Log In" aria-label="login" name="email" ngModel #username="ngModel">
-      <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="password" name="password" ngModel #password="ngModel">
-      <button class="btn my-2 my-sm-0" type="submit">Log In</button>
+      <input class="form-control mr-sm-2" type="text" placeholder="Log In" aria-label="login" name="email" ngModel #username="ngModel" required>
+      <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="password" name="password" ngModel #password="ngModel" required>
+      <button class="btn my-2 my-sm-0" type="submit" [disabled]="loginForm.invalid">
+        Login
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
     </form>
     <div *ngIf="auth.isLoggedIn()">
         <span class="welcomeText my-2" >Welcome, {{ auth.getUserDetails().fname }}!</span>

@@ -15,6 +15,8 @@ export class NavigationComponent implements OnInit {
     password: null
   };
 
+  loading: boolean = false;
+
   constructor(public auth: AuthenticationService,
               private router: Router) { }
 
@@ -22,6 +24,7 @@ export class NavigationComponent implements OnInit {
   }
 
   login(form: NgForm) {
+    this.loading = true;
     this.credentials = {
       email: form.value.email,
       password: form.value.password
@@ -29,6 +32,7 @@ export class NavigationComponent implements OnInit {
 
     this.auth.login(this.credentials)
       .subscribe( (data) => {
+        this.loading = false;
         this.router.navigate(['/dashboard']);
       },
       errMessage => {
