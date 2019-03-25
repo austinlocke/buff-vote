@@ -2,7 +2,7 @@ export interface User {
   fname: String;
   lname: String;
   email: String;
-  type_of_user: String;
+  usertype: String;
   password: String;
   classification: String;
   major: String;

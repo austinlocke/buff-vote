@@ -13,7 +13,7 @@ exports.register = (req, res) => {
         lname: req.body.lname,
         email: req.body.email,
         verified: req.body.verified,
-        type_of_user: req.body.type_of_user,
+        usertype: req.body.usertype,
         classification: req.body.classification,
         major: req.body.major,
         department: req.body.department,
