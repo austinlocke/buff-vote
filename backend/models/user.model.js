@@ -42,6 +42,7 @@ UserSchema.methods.generateJwt = function() {
       email: this.email,
       fname: this.fname,
       lname: this.lname,
+      usertype: this.usertype,
       verified: this.verified,
       exp: parseInt(expiry.getTime() / 1000),
     }, "secret_hash");

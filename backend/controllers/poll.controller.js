@@ -2,7 +2,6 @@ const Poll = require('../models/poll.model.js');
 
 // Create and Save a new Poll
 exports.createPoll = (req, res) => {
-
   const poll = new Poll({
       title: req.body.title,
       owner: req.body.owner,
@@ -61,6 +60,30 @@ exports.findAllPoll = (req, res) => {
   });
 };
 
+// Retrieve and return all Polls from the database that has
+// the access_type pass from params.
+exports.findAllPollWithAccessType = (req, res) =>  {
+  field = "";
+  switch(req.params.usertype) {
+    case "Student":
+      field = "access_type.student";
+      break;
+    case "Faculty":
+      field = "access_type.faculty";
+      break;
+    case "Instructor":
+      field = "access_type.instructor";
+      break;
+  }
+  Poll.find( { [field]: true  }
+  ).then(polls => {
+    res.send(polls);
+  }).catch(err => {
+    res.status(500).send({
+      message: "Error occurred while retrieving Poll with " + req.body
+    })
+  })
+}
 
 // Find Poll using pollId and update it with the request body
 exports.updatePoll = (req, res) => {

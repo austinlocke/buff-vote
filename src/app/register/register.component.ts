@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { HttpParams } from '@angular/common/http';
 
 export interface nodeErrors {
   duplicateEmailError: boolean;

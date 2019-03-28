@@ -53,9 +53,9 @@ export class CreatePollComponent implements OnInit {
       title: form.value.pollName,
       owner: this.authService.getUserDetails().email,
       access_type: {
-        student: form.value.student || false,
-        faculty: form.value.faculty || false,
-        instructor: form.value.instructor || false
+        student: form.value.studentAccess || false,
+        faculty: form.value.facultyAccess || false,
+        instructor: form.value.instructorAccess || false
       },
       questions: form.value.questions,
       date_created: currentDate,
