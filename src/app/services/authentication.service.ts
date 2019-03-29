@@ -10,6 +10,7 @@ export interface UserDetails {
   email: string;
   fname: string;
   lname: string;
+  usertype: string;
   exp: number;
   iat: number;
   verified: boolean;

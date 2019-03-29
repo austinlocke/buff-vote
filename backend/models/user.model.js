@@ -8,7 +8,7 @@ const UserSchema = mongoose.Schema({
     lname: String,
     email: { type: String, required: true, unique: true },
     verified: { type: Boolean, default: false },
-    type_of_user: String,
+    usertype: String,
     hash: String,
     salt: String,
     classification: String,
@@ -36,12 +36,13 @@ UserSchema.methods.validPassword = function(password) {
 UserSchema.methods.generateJwt = function() {
     const expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
-  
+
     return jwt.sign({
       _id: this._id,
       email: this.email,
       fname: this.fname,
       lname: this.lname,
+      usertype: this.usertype,
       verified: this.verified,
       exp: parseInt(expiry.getTime() / 1000),
     }, "secret_hash");

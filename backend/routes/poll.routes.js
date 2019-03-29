@@ -10,6 +10,9 @@ module.exports = (app) => {
   // Retrieve all Polls
   app.get('/api/findAllPoll', poll.findAllPoll);
 
+  // Retrieve all Polls with provide data
+  app.get('/api/findAllPoll/accessType/:usertype', poll.findAllPollWithAccessType);
+
   // Update a Poll with pollId
   app.put('/api/updatePoll/:pollId', poll.updatePoll);
 

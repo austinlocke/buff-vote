@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PollService } from '../services/poll.service';
 import { Poll } from '../models/poll.model';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-view-poll',
@@ -10,10 +12,11 @@ import { Poll } from '../models/poll.model';
 export class ViewPollComponent implements OnInit {
   polls: Poll[];
 
-  constructor(private pollService: PollService) { }
+  constructor(private pollService: PollService,
+              private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.pollService.getPolls()
+    this.pollService.getPolls(this.auth.getUserDetails().usertype)
       .subscribe(
       (data) => {
         this.polls = data;
