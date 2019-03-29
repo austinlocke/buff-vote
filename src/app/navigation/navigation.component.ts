@@ -33,7 +33,7 @@ export class NavigationComponent implements OnInit {
     this.auth.login(this.credentials)
       .subscribe( (data) => {
         this.loading = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/homepage']);
       },
       errMessage => {
         console.log(errMessage);

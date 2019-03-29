@@ -1,8 +1,8 @@
 <nav class="nav-container navbar navbar-expand-lg navbar-light bg-light">
-    <div routerLink="/" class="image-container">
+    <div routerLink="/homepage" class="image-container">
         <img src="assets/buffalo.png">
     </div> 
-    <a class="navbar-brand" routerLink="/">BuffVote</a>
+    <a class="navbar-brand" routerLink="/homepage">BuffVote</a>
     <ul class="navbar-nav mr-auto">
     </ul>
     <form *ngIf="!auth.isLoggedIn()" class="form-inline my-2 my-lg-0" #loginForm="ngForm" (submit)="login(loginForm)">

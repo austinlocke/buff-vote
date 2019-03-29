@@ -1,22 +1,22 @@
 <div class="dashboardContainer">
-    <div *ngIf="!auth.getUserDetails().verified" class="alertContainer">Your account has been registered, please check email to verify account.</div>
-    <div class="subDashContainer">
-      <div class="row">
-        <div class="col">
-          <div class="menuContainer">Previous Polls</div> 
-        </div>
-        <div class="col">
-          <div class="menuContainer">Private Polls</div>
-        </div>
-        <div class="col">
-          <div class="menuContainer" routerLink="/view-polls">Public Polls</div>
-        </div>
-        <div class="col">
-          <div class="menuContainer">Manage Polls</div>
-        </div>
-        <div class="col">
-          <div class="menuContainer" routerLink="/create-poll">Create Poll</div>
-        </div>
+  <div *ngIf="!auth.getUserDetails().verified" class="alertContainer">Your account has been registered, please check email to verify account.</div>
+  <div class="subDashContainer">
+    <div class="row">
+      <div class="col">
+        <div class="menuContainer">Previous Polls</div> 
+      </div>
+      <div class="col">
+        <div class="menuContainer">Private Polls</div>
+      </div>
+      <div class="col">
+        <div class="menuContainer" routerLink="/view-polls">Public Polls</div>
+      </div>
+      <div class="col">
+        <div class="menuContainer">Manage Polls</div>
+      </div>
+      <div class="col">
+        <div class="menuContainer" routerLink="/create-poll">Create Poll</div>
       </div>
     </div>
-  </div>  
+  </div>
+</div> 

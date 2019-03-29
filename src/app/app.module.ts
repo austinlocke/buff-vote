@@ -19,6 +19,7 @@ import { CreatePollComponent } from './create-poll/create-poll.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuardsCheckEnd } from '@angular/router';
 import { ViewPollComponent } from './view-poll/view-poll.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ViewPollComponent } from './view-poll/view-poll.component';
     ValidatePasswordsMatchDirective,
     CreatePollComponent,
     ViewPollComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
