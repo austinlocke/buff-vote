@@ -27,4 +27,9 @@ export class ViewPollComponent implements OnInit {
     });
   }
 
+  formatDate(isoDate) {
+    const date = new Date(isoDate);
+    return (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
+  }
+
 }

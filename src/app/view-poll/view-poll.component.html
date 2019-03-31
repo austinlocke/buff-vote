@@ -4,10 +4,11 @@
     <div *ngFor="let poll of polls; index as i" class="col-md-4">
       <div class="pollBox">
         <span>{{ poll.title }}</span>
-        <!-- <div class="bottom">
+        <div class="bottom">
           <span>Created By: {{ poll.owner }}</span>
-          <span>Ending Date: {{ poll.endDate }}</span>
-        </div> -->
+          <br>
+          <span>Ending Date: {{ formatDate(poll.end_date) }}</span>
+        </div>
       </div>
     </div>
   </div>
