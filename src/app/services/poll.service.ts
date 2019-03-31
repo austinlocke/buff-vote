@@ -8,11 +8,12 @@ import { Poll } from '../models/poll.model';
   providedIn: 'root'
 })
 export class PollService {
+  polls: Poll[];
 
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  private request(method: 'post'|'get', type: 'createPoll' | 'findAllPoll',
+  private request(method: 'post'|'get', type: 'createPoll' | 'findAllPoll' | 'findOnePoll',
                   extention?: String, poll?: Poll): Observable<any> {
     let base;
     let path;
@@ -36,8 +37,12 @@ export class PollService {
   }
 
   public getPolls(accessType: string): Observable<any> {
-    console.log(accessType);
     const path = '/accessType/' + accessType;
     return this.request('get', 'findAllPoll', path, null);
+  }
+
+  public getPoll(pollId: string): Observable <any> {
+    const path = `/${pollId}`;
+    return this.request('get', 'findOnePoll', path);
   }
 }

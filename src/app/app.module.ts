@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuardsCheckEnd } from '@angular/router';
 import { ViewPollComponent } from './view-poll/view-poll.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { VotePollComponent } from './vote-poll/vote-poll.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     CreatePollComponent,
     ViewPollComponent,
     HomepageComponent,
+    VotePollComponent,
   ],
   imports: [
     BrowserModule,
