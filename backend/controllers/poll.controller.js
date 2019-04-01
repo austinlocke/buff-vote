@@ -60,6 +60,21 @@ exports.findAllPoll = (req, res) => {
   });
 };
 
+// Retrieve and return all Polls from the database that belongs
+// to a user by using a user email.
+// The email is passed through params.
+exports.findAllPollWithOwner = (req, res) =>  {
+  Poll.find( { owner: req.params.owner }
+  ).then(polls => {
+    res.send(polls);
+  }).catch(err => {
+    res.status(500).send({
+      message: "Error occurred while retrieving Poll with " + req.body
+    })
+  })
+}
+
+
 // Retrieve and return all Polls from the database that has
 // the access_type pass from params.
 exports.findAllPollWithAccessType = (req, res) =>  {
