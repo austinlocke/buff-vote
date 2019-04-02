@@ -2,6 +2,7 @@
 <div class="container pollContainer">
   <div class="jumbotron">
     <h1 id="title"><strong>Manage a Poll/Election</strong></h1>
+    <hr class="my-4">
     <div class="buttonContainer">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-secondary" [ngClass]="activePage == 0 ? 'active' : 'none'">
@@ -19,7 +20,7 @@
         <h2 id="header"><strong>Active Poll/Election:</strong></h2>
         <div class="row">
           <div *ngFor="let poll of activePolls; index as i" class="col-md-4">
-            <div class="pollBox">
+            <div class="pollBox" (click)="navigate(poll)">
               <span>{{ poll.title }}</span>
               <div class="bottom">
                 <span>Created On: {{ formatDate(poll.date_created) }}</span>
@@ -34,7 +35,7 @@
         <h2 id="header"><strong>Ended Poll/Election:</strong></h2>
         <div class="row">
           <div *ngFor="let poll of endedPolls; index as j" class="col-md-4">
-            <div class="pollBox">
+            <div class="pollBox" (click)="navigate(poll)">
               <span>{{ poll.title }}</span>
               <div class="bottom">
                 <span>Created On: {{ formatDate(poll.date_created) }}</span>

@@ -8,30 +8,39 @@
 }
 
 #header {
-  padding-top: 15px;
   width: 100%;
   font-style: italic;
-  font-size: 2em;
+  font-size: 1.5em;
   color: rgb(85, 85, 85);
+}
+
+#header2 {
+  width: 100%;
+  font-style: italic;
+  font-size: 1.5em;
+  color: rgb(85, 85, 85);
+  text-align: center;
 }
 
 .pollContainer {
   padding-top: 15px;
 }
 
-.pollBox {
-  padding-top: 15px;
+.elementBox {
   width: 100%;
-  height: 150px;
-  border-radius: 5px;
   background-color: white;
   border: 1px solid #730A31;
-  margin-top: 15px;
   color: #730A31;
   text-align: center;
-  line-height: 45px;
-  font-size: 1.4em;
-  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.leftBox {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.rightBox {
+  border-radius: 0px 5px 5px 0px;
 }
 
 .pollBox:hover {
@@ -43,7 +52,7 @@
 
 .buttonContainer {
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   width: 100%;
   text-align: center;
 }
@@ -69,6 +78,10 @@
   bottom: 0;
 }
 
+.element {
+  text-align: center;
+}
+
 .createContainer {
   margin: 0 auto;
 }
@@ -76,3 +89,27 @@
 .hide {
   display: none;
 }
+
+.qTitle {
+  margin-top: 10px;
+  width: 100%;
+  font-style: italic;
+  font-size: 1.5em;
+  color: rgb(85, 85, 85);
+}
+
+.option {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 60%;
+  background-color: white;
+  border: 1px solid #730A31;
+  color: #730A31;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+  height: 35px;
+  line-height: 35px;
+}
+
+

@@ -56,4 +56,8 @@ export class ManagePollComponent implements OnInit {
     return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
   }
 
+  navigate(poll) {
+    this.router.navigate(['view-result', poll._id]);
+  }
+
 }

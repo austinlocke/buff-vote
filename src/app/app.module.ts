@@ -22,6 +22,7 @@ import { ViewPollComponent } from './view-poll/view-poll.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { VotePollComponent } from './vote-poll/vote-poll.component';
 import { ManagePollComponent } from './manage-poll/manage-poll.component';
+import { ViewResultComponent } from './view-result/view-result.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ManagePollComponent } from './manage-poll/manage-poll.component';
     ViewPollComponent,
     HomepageComponent,
     VotePollComponent,
-    ManagePollComponent
+    ManagePollComponent,
+    ViewResultComponent
   ],
   imports: [
     BrowserModule,

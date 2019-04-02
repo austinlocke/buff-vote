@@ -9,6 +9,7 @@ import { ViewPollComponent } from './view-poll/view-poll.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { VotePollComponent } from './vote-poll/vote-poll.component';
 import { ManagePollComponent } from './manage-poll/manage-poll.component';
+import { ViewResultComponent } from './view-result/view-result.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'manage-polls',
     component: ManagePollComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'view-result/:poll_id',
+    component: ViewResultComponent,
     canActivate: [AuthGuard]
   },
   {
