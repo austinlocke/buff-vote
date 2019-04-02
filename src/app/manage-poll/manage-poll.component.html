@@ -1,0 +1,50 @@
+<app-dashboard></app-dashboard>
+<div class="container pollContainer">
+  <div class="jumbotron">
+    <h1 id="title"><strong>Manage a Poll/Election</strong></h1>
+    <div class="buttonContainer">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary" [ngClass]="activePage == 0 ? 'active' : 'none'">
+            <input type="radio" name="options" id="option1" autocomplete="off" (click)="activePage=0"> Active
+          </label>
+          <label class="btn btn-secondary" [ngClass]="activePage == 1 ? 'active' : 'none'">
+            <input type="radio" name="options" id="option2" autocomplete="off" (click)="activePage=1"> Ended
+          </label>
+        </div>
+    </div>
+
+
+    <div class="createContainer">
+      <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="active">
+        <h2 id="header"><strong>Active Poll/Election:</strong></h2>
+        <div class="row">
+          <div *ngFor="let poll of activePolls; index as i" class="col-md-4">
+            <div class="pollBox">
+              <span>{{ poll.title }}</span>
+              <div class="bottom">
+                <span>Created On: {{ formatDate(poll.date_created) }}</span>
+                <br>
+                <span>Ending Date: {{ formatDate(poll.end_date) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [ngClass]="activePage !== 1 ? 'hide' : 'none'" class="ended">
+        <h2 id="header"><strong>Ended Poll/Election:</strong></h2>
+        <div class="row">
+          <div *ngFor="let poll of endedPolls; index as j" class="col-md-4">
+            <div class="pollBox">
+              <span>{{ poll.title }}</span>
+              <div class="bottom">
+                <span>Created On: {{ formatDate(poll.date_created) }}</span>
+                <br>
+                <span>Ending Date: {{ formatDate(poll.end_date) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

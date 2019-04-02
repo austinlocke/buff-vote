@@ -21,6 +21,7 @@ import { GuardsCheckEnd } from '@angular/router';
 import { ViewPollComponent } from './view-poll/view-poll.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { VotePollComponent } from './vote-poll/vote-poll.component';
+import { ManagePollComponent } from './manage-poll/manage-poll.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { VotePollComponent } from './vote-poll/vote-poll.component';
     ViewPollComponent,
     HomepageComponent,
     VotePollComponent,
+    ManagePollComponent
   ],
   imports: [
     BrowserModule,

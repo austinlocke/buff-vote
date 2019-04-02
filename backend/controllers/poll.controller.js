@@ -65,7 +65,7 @@ exports.findAllPoll = (req, res) => {
 // The email is passed through params.
 exports.findAllPollWithOwner = (req, res) =>  {
   Poll.find( { owner: req.params.owner }
-  ).then(polls => {
+  ).sort( {end_date: -1, date_created: 1} ).then(polls => {
     res.send(polls);
   }).catch(err => {
     res.status(500).send({
@@ -91,7 +91,7 @@ exports.findAllPollWithAccessType = (req, res) =>  {
       break;
   }
   Poll.find( { [field]: true  }
-  ).then(polls => {
+  ).sort( {end_date: -1, date_created: 1} ).then(polls => {
     res.send(polls);
   }).catch(err => {
     res.status(500).send({

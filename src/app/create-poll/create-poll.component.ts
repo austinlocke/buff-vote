@@ -48,7 +48,8 @@ export class CreatePollComponent implements OnInit {
     // Months start with 0 to 11
     const month = form.value.endDate.month - 1;
     const day = form.value.endDate.day;
-    const endDate = new Date(year, month, day);
+    const endDate = new Date(year, month, day, 23, 59, 59);
+    console.log(endDate);
     const poll: Poll = {
       title: form.value.pollName,
       owner: this.authService.getUserDetails().email,
