@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       if (!this.auth.getUserDetails().verified) {
         this.auth.logout();
       }
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/homepage']);
     }
   }
 

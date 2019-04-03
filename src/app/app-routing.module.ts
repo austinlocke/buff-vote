@@ -43,6 +43,7 @@ const routes: Routes = [
   {
     path: 'vote-poll/:poll_id',
     component: VotePollComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manage-polls',
