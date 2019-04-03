@@ -30,12 +30,20 @@ export class VotePollComponent implements OnInit {
   }
 
   submitVote() {
+    console.log(Object.keys(this.choices).length);
+    console.log(this.poll.questions.length);
     this.pollService.vote(this.pollId, this.choices).subscribe(
       (data) => {
+        console.log(data);
         this.routeNav.navigate(['/homepage']);
       },
       (err) => {
         console.log(err);
+        this.routeNav.navigate(['/homepage']);
     });
+  }
+
+  verifyAllAnswered(): boolean {
+    return Object.keys(this.choices).length === this.poll.questions.length;
   }
 }

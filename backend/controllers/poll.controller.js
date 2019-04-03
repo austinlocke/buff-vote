@@ -33,7 +33,9 @@ exports.createPoll = (req, res) => {
 
 //TODO: Jonathan implements this
 exports.votePoll = (req, res) => {
-
+  res.status(200).send({
+    message: "A-Okay!"
+  });
 }
 
 // Find a single poll with a pollId
