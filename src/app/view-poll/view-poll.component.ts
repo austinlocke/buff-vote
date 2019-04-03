@@ -39,7 +39,6 @@ export class ViewPollComponent implements OnInit {
   }
 
   navigate(poll) {
-    console.log('hello')
     this.router.navigate(['vote-poll', poll._id]);
   }
 }

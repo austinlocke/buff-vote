@@ -4,6 +4,9 @@ module.exports = (app) => {
   // Create a new Poll
   app.post('/api/createPoll', poll.createPoll);
 
+  // Vote in a poll
+  app.post('/api/votePoll/:pollId', poll.votePoll);
+
   // Retrieve a single poll with pollId
   app.get('/api/findOnePoll/:pollId', poll.findOnePoll);
 

@@ -31,6 +31,11 @@ exports.createPoll = (req, res) => {
   });
 };
 
+//TODO: Jonathan implements this
+exports.votePoll = (req, res) => {
+
+}
+
 // Find a single poll with a pollId
 exports.findOnePoll = (req, res) => {
   Poll.findById(req.params.pollId)

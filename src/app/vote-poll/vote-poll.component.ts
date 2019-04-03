@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Poll } from '../models/poll.model';
 import { PollService } from '../services/poll.service';
 import { switchMap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class VotePollComponent implements OnInit {
   pollId;
   choices = {};
 
-  constructor(private route: ActivatedRoute, private pollService: PollService) { }
+  constructor(private route: ActivatedRoute, private routeNav: Router, private pollService: PollService) { }
 
   ngOnInit() {
     this.pollId = this.route.snapshot.params['poll_id'];
@@ -27,6 +27,15 @@ export class VotePollComponent implements OnInit {
 
   select(qIndex, opIndex) {
     this.choices[qIndex] = opIndex;
-    console.log(this.choices);
+  }
+
+  submitVote() {
+    this.pollService.vote(this.pollId, this.choices).subscribe(
+      (data) => {
+        this.routeNav.navigate(['/homepage']);
+      },
+      (err) => {
+        console.log(err);
+    });
   }
 }

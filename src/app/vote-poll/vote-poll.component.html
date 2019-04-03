@@ -8,7 +8,7 @@
         <h5 class="qTitle">{{question.questionTitle}}</h5>
         <p *ngFor="let option of question.options; index as j" class="option" [ngClass]="{'selected': choices[i] == j}" (click)="select(i, j)">{{ option.option }}</p>
       </div>
-      <button class="btn submitVote">Submit Vote</button>
+      <button class="btn submitVote" (click)="submitVote()">Submit Vote</button>
     </div>
   </div>
 </div>
