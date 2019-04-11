@@ -16,7 +16,6 @@ export class AlertService {
     // clear alert messages on route change unless 'keepAfterRouteChange' flag is true
     router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-          console.log("keepAfterRouteChange value: " + this.keepAfterRouteChange);
           if (this.keepAfterRouteChange) {
               // only keep for a single route change
               this.keepAfterRouteChange = false;

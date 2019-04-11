@@ -97,7 +97,7 @@ exports.findAllPollWithAccessType = (req, res) =>  {
       field = "access_type.instructor";
       break;
   }
-  Poll.find( { [field]: true  }
+  Poll.find( { [field]: true, "end_date": {$gte: new Date() }  }
   ).sort( {end_date: -1, date_created: 1} ).then(polls => {
     res.send(polls);
   }).catch(err => {
