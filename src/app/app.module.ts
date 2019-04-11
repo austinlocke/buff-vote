@@ -23,6 +23,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { VotePollComponent } from './vote-poll/vote-poll.component';
 import { ManagePollComponent } from './manage-poll/manage-poll.component';
 import { ViewResultComponent } from './view-result/view-result.component';
+import { AlertService } from './services/alert.service';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ViewResultComponent } from './view-result/view-result.component';
     HomepageComponent,
     VotePollComponent,
     ManagePollComponent,
-    ViewResultComponent
+    ViewResultComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { ViewResultComponent } from './view-result/view-result.component';
   providers: [
     AuthenticationService,
     PollService,
-    AuthGuardService
+    AuthGuardService,
+    AlertService
   ],
   bootstrap: [AppComponent],
   entryComponents: []

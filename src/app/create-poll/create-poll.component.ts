@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { Poll } from '../models/poll.model';
 import { PollService } from '../services/poll.service';
+import { AlertService } from '../services/alert.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -26,6 +27,8 @@ export class CreatePollComponent implements OnInit {
 
   constructor(private pollService: PollService,
               private authService: AuthenticationService,
+              private route: Router,
+              private alertService: AlertService,
               private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
@@ -63,7 +66,17 @@ export class CreatePollComponent implements OnInit {
       end_date: endDate
     };
 
-    this.pollService.createPoll(poll).subscribe();
+    this.pollService.createPoll(poll).subscribe(
+      (data) => {
+        console.log(data);
+        this.alertService.success('The poll "' + poll.title + '" was created successfully.', true);
+        this.route.navigate(['/manage-polls']);
+      },
+      (err) => {
+        console.log(err);
+        this.alertService.error('Error: An error has occurred when creating the poll "' + poll.title + '".', true);
+        this.route.navigate(['/manage-polls']);
+    });
   }
 
   createQuestion() {

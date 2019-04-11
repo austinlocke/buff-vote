@@ -1,0 +1,4 @@
+<ngb-alert *ngFor="let alert of alerts" [type]="getAlertType(alert)" class="alert-dismissable alertBox"
+  (close)="removeAlert(alert)">
+  {{alert.message}}
+</ngb-alert>
