@@ -18,7 +18,7 @@ export class NavigationComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(private auth: AuthenticationService,
+  constructor(public auth: AuthenticationService,
               private alertService: AlertService,
               private router: Router) { }
 
