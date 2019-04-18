@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Credentials, AuthenticationService, UserDetails } from '../services/authentication.service';
+import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -17,7 +18,8 @@ export class NavigationComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(public auth: AuthenticationService,
+  constructor(private auth: AuthenticationService,
+              private alertService: AlertService,
               private router: Router) { }
 
   ngOnInit() {
@@ -36,7 +38,15 @@ export class NavigationComponent implements OnInit {
         this.router.navigate(['/homepage']);
       },
       errMessage => {
-        console.log(errMessage);
+        this.alertService.clear();
+        if (errMessage.statusText === "Unauthorized") {
+          this.alertService.error("You have entered an invalid email or password.", false);
+        } else {
+          this.alertService.error("An error has occured when trying to login. Please try again later.", false);
+        }
+
+        // console.log(errMessage);
+        this.loading = false;
     });
   }
 
