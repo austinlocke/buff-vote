@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
+import { AlertService } from './alert.service';
 
 export interface UserDetails {
   _id: string;
@@ -33,7 +34,8 @@ export class AuthenticationService {
   private token: string;
 
   constructor(private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private alertService: AlertService) { }
 
   private saveToken(token: string) {
     localStorage.setItem('mean-token', token);
@@ -47,7 +49,10 @@ export class AuthenticationService {
     return this.token;
   }
 
-  public logout(): void {
+  public logout(message?: string): void {
+    if (message) {
+      this.alertService.success(message, true);
+    }
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
@@ -101,6 +106,10 @@ export class AuthenticationService {
 
   public sendVerification(userDetails: UserDetails ): Observable<any> {
     return this.request('post', 'verification', userDetails);
+  }
+
+  public sendConfermation(token: String): Observable<any> {
+    return this.http.post(`http://localhost:3000/api/confirmation/${token}`, {});
   }
 
   public login(cred: Credentials): Observable<any> {

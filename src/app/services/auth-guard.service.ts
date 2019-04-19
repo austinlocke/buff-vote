@@ -10,11 +10,16 @@ export class AuthGuardService implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot): boolean {
     // Check if user is logged in, if not redirect them to login page
     if (this.auth.isLoggedIn()) {
-      if (!this.auth.getUserDetails().verified && (next.data.path !== "/verify-email")) {
+      if (!this.auth.getUserDetails().verified &&
+          (next.data.path !== "/verify-email") &&
+          (next.data.path !== "/verify-email/:token")) {
         this.router.navigate(['/verify-email']);
       }
       return true;
     } else {
+      if ((next.data.path === "/verify-email/:token")) {
+        return true;
+      }
       this.router.navigate(['/']);
       return false;
     }

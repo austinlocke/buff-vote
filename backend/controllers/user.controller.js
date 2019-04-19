@@ -74,7 +74,7 @@ exports.sendVerificationEmail = async (req, res) => {
       expiresIn: '24h',
     },
     (err, emailToken) => {
-      const url = `http://localhost:3000/api/confirmation/${emailToken}`;
+      const url = `http://localhost:4200/verify-email/${emailToken}`;
 
       var message = {
         from: 'BuffVote <noreply@buffvote.com>',
@@ -121,8 +121,7 @@ exports.updateVerification = (req, res) => {
           res.status(500).send({'error':'Error occurred while updating verification'});
         }
         else {
-          res.status(200)// .send('Your account verification has been updated ' + decoded.email);
-             .redirect("http://localhost:4200/");
+          res.status(200).send({ message: "Verification Successful!"});
         }
       });
     });
