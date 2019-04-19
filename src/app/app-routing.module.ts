@@ -62,6 +62,12 @@ const routes: Routes = [
     data: { path : "/verify-email" }
   },
   {
+    path: 'verify-email/:token',
+    component: VerifyEmailComponent,
+    canActivate: [AuthGuard],
+    data: { path : "/verify-email/:token" }
+  },
+  {
     path: '**',
     redirectTo: ''
   }

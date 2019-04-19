@@ -14,7 +14,7 @@ module.exports = (app) => {
   app.post('/api/verification', user.sendVerificationEmail);
 
   // Retrieve user confirmation email, to update user verification in database
-  app.get('/api/confirmation/:token', user.updateVerification);
+  app.post('/api/confirmation/:token', user.updateVerification);
 
   // Login User
   app.post('/api/login', user.login);
