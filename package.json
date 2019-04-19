@@ -33,6 +33,7 @@
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.16",
     "mongoose-unique-validator": "^2.0.2",
+    "multichain-node": "^2.2.0-version1.0.4",
     "nodemailer": "^5.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -42,8 +43,8 @@
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.4",
-    "@angular/cli": "^7.3.4",
+    "@angular-devkit/build-angular": "^0.13.8",
+    "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "^7.2.7",
     "@angular/language-service": "^7.2.7",
     "@types/jasmine": "^2.8.16",
