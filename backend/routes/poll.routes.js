@@ -7,6 +7,8 @@ module.exports = (app) => {
   // Vote in a poll
   app.post('/api/votePoll/:pollId', poll.votePoll);
 
+  app.get('/api/pollResult/:pollId', poll.pollResult);
+
   // Retrieve a single poll with pollId
   app.get('/api/findOnePoll/:pollId', poll.findOnePoll);
 
@@ -24,5 +26,8 @@ module.exports = (app) => {
 
   // Delete a Poll by passing poll _id
   app.delete('/api/deletePoll/:pollId', poll.deletePoll);
+
+  // Delete a Poll by passing poll _id
+  app.delete('/api/deleteAllPoll', poll.deleteAllPoll);
 };
 

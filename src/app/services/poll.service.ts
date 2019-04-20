@@ -51,7 +51,7 @@ export class PollService {
     return this.request('get', 'findOnePoll', path);
   }
 
-  public vote(pollId: string, choices: object) {
-    return this.http.post(`http://localhost:3000/api/votePoll/${pollId}`, choices);
+  public vote(pollId: string, pollChoices: object) {
+    return this.http.post(`http://localhost:3000/api/votePoll/${pollId}`, pollChoices);
   }
 }

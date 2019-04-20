@@ -1,5 +1,5 @@
 const Poll = require('../models/poll.model.js');
-
+const blockChain = require('../utility/blockchain.utility.js');
 // Create and Save a new Poll
 exports.createPoll = (req, res) => {
   const poll = new Poll({
@@ -18,6 +18,7 @@ exports.createPoll = (req, res) => {
   // Save Poll in the database
   poll.save()
   .then(data => {
+      blockChain.createAsset(data);
       res.status(200).send({
           status: 200,
           message: 'Poll created!',
@@ -33,10 +34,50 @@ exports.createPoll = (req, res) => {
 
 //TODO: Jonathan implements this
 exports.votePoll = (req, res) => {
+  console.log(req.body);
+  for (let choice of req.body) {
+    blockChain.sendAsset(choice.optionId);
+  }
+
   res.status(200).send({
     message: "A-Okay!"
   });
 }
+
+exports.pollResult = (req, res) => {
+  Poll.findById(req.params.pollId)
+  .then(poll => {
+      if(!poll) {
+          res.status(404).send({
+              message: "Error: Poll not found with id " + req.params.pollId
+          });
+      }
+      //console.log(poll);
+      // for(let question of poll.questions) {
+      //   console.log(question.questionTitle);
+      //   //for (let option of poll.questions.options) {
+      //     console.log(question._id + " " + option._id);
+      //     // blockChain.getAssetBalance("test").then( (result) => {
+      //     //   console.log(result);
+      //     // });
+      //   //}
+      // }
+
+      blockChain.getAssetBalance(poll).then( (result) => {
+        console.log(result);
+      });
+
+
+      res.send(poll);
+  }).catch(err => {
+      res.status(500).send({
+          message: "Error: Could not retrieve poll with id " + req.params.pollId,
+          error: err
+      });
+  });
+
+}
+
 
 // Find a single poll with a pollId
 exports.findOnePoll = (req, res) => {
@@ -139,6 +180,23 @@ exports.updatePoll = (req, res) => {
 // Delete a poll with the specified Id in the request
 exports.deletePoll = (req, res) => {
   Poll.findByIdAndDelete(req.params.pollId)
+  .then(poll => {
+      if(!poll) {
+          res.status(404).send({
+              message: "Poll not found with id " + req.params.pollId
+          });
+      }
+      res.send({message: "Poll deleted successfully!"});
+  }).catch(err => {
+      res.status(500).send({
+          message: "Could not delete Poll with id " + req.params.pollId
+      });
+  });
+};
+
+// Delete a poll with the specified Id in the request
+exports.deleteAllPoll = (req, res) => {
+  Poll.deleteMany()
   .then(poll => {
       if(!poll) {
           res.status(404).send({

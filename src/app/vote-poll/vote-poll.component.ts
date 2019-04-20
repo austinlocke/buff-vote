@@ -6,6 +6,12 @@ import { AlertService } from '../services/alert.service';
 import { Alert, AlertType } from '../models/alert.model';
 import { AuthenticationService } from '../services/authentication.service';
 
+export interface PollChoices {
+  pollId: String;
+  questionId: String;
+  optionId: String;
+}
+
 
 @Component({
   selector: 'app-vote-poll',
@@ -17,6 +23,7 @@ export class VotePollComponent implements OnInit {
   poll: Poll;
   pollId;
   choices = {};
+  pollChoices: PollChoices[] = [];
 
   constructor(private route: ActivatedRoute,
               private routeNav: Router,
@@ -57,7 +64,19 @@ export class VotePollComponent implements OnInit {
   submitVote() {
     console.log(Object.keys(this.choices).length);
     console.log(this.poll.questions.length);
-    this.pollService.vote(this.pollId, this.choices).subscribe(
+    console.log("Choices: ");
+    console.log(this.choices);
+    for (let i = 0; i < this.poll.questions.length; i++ ) {
+      this.pollChoices[i] = {
+        pollId: this.poll._id,
+        questionId: this.poll.questions[i]._id,
+        optionId: this.poll.questions[i].options[this.choices[i]]._id
+      };
+    }
+
+    console.log(this.pollChoices);
+
+    this.pollService.vote(this.pollId, this.pollChoices).subscribe(
       (data) => {
         console.log(data);
         this.routeNav.navigate(['/homepage']);

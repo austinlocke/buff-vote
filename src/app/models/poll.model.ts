@@ -1,4 +1,5 @@
 export interface Poll {
+  _id: String;
   title: String;
   owner: String;
   access_type: {
@@ -7,8 +8,10 @@ export interface Poll {
     instructor: Boolean
   };
   questions: [{
+    _id: String;
     questionTitle: String,
     options: [{
+      _id: String;
       option: String
     }]
   }];
