@@ -1,0 +1,53 @@
+.voteContainer {
+    margin-top: 45px;
+}
+
+.title {
+    text-align: center;
+    color: #730A31;
+}
+
+.qTitle {
+    margin-top: 30px;
+    margin-left: 25%;
+    color: #730A31;
+}
+
+.option {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 50%;
+    background-color: #730A31;
+    color: white;
+    border: solid 1px white;
+    border-radius: 5px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+
+.selected {
+    background-color: white;
+    color: #730A31;
+    border: solid 1px #730A31;
+}
+
+.submitVote {
+    margin-left: 25%;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: transparent !important;
+    color: #730A31 !important;
+    border: 1px solid #730A31 !important;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active {
+    color: white !important;
+    background-color: #730A31 !important;
+}

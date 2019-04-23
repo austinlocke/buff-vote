@@ -1,0 +1,13 @@
+<app-dashboard></app-dashboard>
+<div class="container voteContainer">
+  <div class="jumbotron">
+    <div *ngIf="poll">
+      <h1 class="title">{{ poll.title }}</h1>
+      <br>
+      <div *ngFor="let question of poll.questions; index as i">
+        <h5 class="qTitle">{{question.questionTitle}}</h5>
+        <p *ngFor="let option of question.options; index as j" class="option">{{ option.option }}</p>
+      </div>
+    </div>
+  </div>
+</div>

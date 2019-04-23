@@ -1,0 +1,37 @@
+.pollContainer {
+    width: 50%;
+    margin: 0 auto;
+    font-family: 'Roboto', 'sans-serif' !important;
+}
+
+.pollBox {
+    padding-top: 15px;
+    width: 100%;
+    height: 150px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #730A31;
+    margin-top: 15px;
+    color: #730A31;
+    text-align: center;
+    line-height: 45px;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.pollBox:hover {
+    background-color: #730A31;
+    color: white;
+    border: 1px solid white;
+    position: relative;
+}
+
+.bottom {
+    line-height: 1.2em;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    font-size: 0.7em;
+    position: absolute;
+    bottom: 0;
+}
