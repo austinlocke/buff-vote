@@ -19,8 +19,6 @@ exports.createPoll = (req, res) => {
   poll.save()
   .then(data => {
     blockChain.createAsset(data).then( (info) => {
-      console.log("info " + info);
-      console.log("Test in successfully creating asset");
       res.status(200).send({
         status: 200,
         message: 'Poll created!',
@@ -45,15 +43,20 @@ exports.createPoll = (req, res) => {
   });
 };
 
-//TODO: Jonathan implements this
 exports.votePoll = (req, res) => {
-  console.log(req.body);
-  for (let choice of req.body) {
-    blockChain.sendAsset(choice.optionId);
-  }
-
-  res.status(200).send({
-    message: "A-Okay!"
+  choices = req.body;
+  pollId = choices[0].pollId;
+  blockChain.sendAsset(choices).then( (info) => {
+    res.status(200).send({
+      status: 200,
+      message: 'Successfully Voted!',
+    });
+  }, err => {
+    console.log("Error with voting in Poll with id \"" + pollId + "\"");
+    console.log(err);
+    res.status(500).send({
+      error: "Error with voting in poll with id \"" + pollId + "\""
+    })
   });
 }
 
