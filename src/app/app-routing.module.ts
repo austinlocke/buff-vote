@@ -10,6 +10,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { VotePollComponent } from './vote-poll/vote-poll.component';
 import { ManagePollComponent } from './manage-poll/manage-poll.component';
 import { ViewResultComponent } from './view-result/view-result.component';
+import { PollResultsComponent } from './poll-results/poll-results.component';
+import { ViewSingleResultComponent } from './view-single-result/view-single-result.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'view-single-poll/:poll_id',
+    component: ViewSingleResultComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'manage-polls',
     component: ManagePollComponent,
     canActivate: [AuthGuard]
@@ -66,6 +73,11 @@ const routes: Routes = [
     component: VerifyEmailComponent,
     canActivate: [AuthGuard],
     data: { path : "/verify-email/:token" }
+  },
+  {
+    path: 'poll-results',
+    component: PollResultsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

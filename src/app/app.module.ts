@@ -25,6 +25,8 @@ import { ManagePollComponent } from './manage-poll/manage-poll.component';
 import { ViewResultComponent } from './view-result/view-result.component';
 import { AlertService } from './services/alert.service';
 import { AlertComponent } from './alert/alert.component';
+import { PollResultsComponent } from './poll-results/poll-results.component';
+import { ViewSingleResultComponent } from './view-single-result/view-single-result.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AlertComponent } from './alert/alert.component';
     VotePollComponent,
     ManagePollComponent,
     ViewResultComponent,
-    AlertComponent
+    AlertComponent,
+    PollResultsComponent,
+    ViewSingleResultComponent
   ],
   imports: [
     BrowserModule,
