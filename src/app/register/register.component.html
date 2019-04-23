@@ -54,7 +54,7 @@
       <div class="form-group col-md-4">
         <label for="password">Password</label>
         <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required
-          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,}">
+          [pattern]=passwordPattern>
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
           <div *ngIf="password.errors.required">
             Password is required
@@ -180,10 +180,13 @@
         </div>
         <div class="form-group col-md-2">
           <label for="zip">Zip</label>
-          <input type="text" class="form-control" name="zip" ngModel #zip="ngModel" required placeholder="Zip Code">
+          <input type="text" class="form-control" name="zip" ngModel #zip="ngModel" required placeholder="Zip Code" pattern="[0-9]{5}">
           <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
             <div *ngIf="zip.errors.required">
               Zip is required
+            </div>
+            <div *ngIf="zip.errors.pattern">
+                Invalid Zip
             </div>
           </div>
         </div>
@@ -222,7 +225,7 @@
         </div>
       </div>
       <div *ngIf="registerForm.invalid && (registerForm.dirty || registerForm.touched)" class="alert alert-danger">Please fix the form before submitting.</div>
-      <div *ngIf="nodeErrors.duplicateEmailError" class="alert alert-danger">The WTAMU email provided is currently in use.</div> 
+      <div *ngIf="nodeErrors.duplicateEmailError" class="alert alert-danger">The WTAMU email provided is currently in use.</div>
       <button type="submit" class="btn" [disabled]="registerForm.invalid">Register</button>
     </form>
   </div>

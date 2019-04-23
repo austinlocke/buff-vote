@@ -16,6 +16,9 @@ export interface nodeErrors {
 
 export class RegisterComponent implements OnInit {
 
+  specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+  passwordPattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[" + this.specialCharacters + "]).{8,}";
+
   nodeErrors: nodeErrors = {
     duplicateEmailError: false
   };
