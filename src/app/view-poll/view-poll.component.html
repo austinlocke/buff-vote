@@ -1,16 +1,20 @@
 <app-dashboard></app-dashboard>
-<div class="container">
-  <div class="spinner">
-      <span *ngIf="loading" class="spinner-border" role="status" aria-hidden="true"></span>
-  </div>
-  <div class="row">
-    <div *ngFor="let poll of polls; index as i" class="col-md-4">
-      <div class="pollBox" (click)="navigate(poll)">
-        <span>{{ poll.title }}</span>
-        <div class="bottom">
-          <span>Created By: {{ poll.owner }}</span>
-          <br>
-          <span>Ending Date: {{ formatDate(poll.end_date) }}</span>
+<div class="container pollContainer">
+  <div class="jumbotron">
+    <h1 id="title"><strong>Public Polls/Elections</strong></h1>
+    <hr class="my-4">
+    <div *ngIf="loading" class="spinner">
+        <span class="spinner-border" role="status" aria-hidden="true"></span>
+    </div>
+    <div class="row">
+      <div *ngFor="let poll of polls; index as i" class="col-md-4">
+        <div class="pollBox" (click)="navigate(poll)">
+          <span>{{ poll.title }}</span>
+          <div class="bottom">
+            <span>Created By: {{ poll.owner }}</span>
+            <br>
+            <span>Ending Date: {{ formatDate(poll.end_date) }}</span>
+          </div>
         </div>
       </div>
     </div>
