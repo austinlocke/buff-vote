@@ -156,13 +156,25 @@ exports.findAllPollWithAccessType = (req, res) =>  {
   }
   Poll.find( { [field]: true, "end_date": {$gte: new Date() }  }
   ).sort( {end_date: -1, date_created: 1} ).then(polls => {
-    res.send(polls);
+    res.status(200).send(polls);
   }).catch(err => {
     res.status(500).send({
       message: "Error occurred while retrieving Poll with " + req.body
     })
   })
 }
+
+// Retrieve and return all Polls that has ended.
+exports.findAllEndedPoll = (req, res) => {
+  Poll.find( { "end_date": {$lt: new Date() } }
+  ).sort( {end_date: -1, date_created: 1} ).then(polls => {
+    res.status(200).send(polls);
+  }).catch(err => {
+    res.status(500).send({
+      message: "Error occurred while retrieving Poll with " + req.body
+    })
+  })
+};
 
 // Find Poll using pollId and update it with the request body
 exports.updatePoll = (req, res) => {

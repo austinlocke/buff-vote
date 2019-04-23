@@ -21,6 +21,9 @@ module.exports = (app) => {
   // Retrieve all Polls with a user type
   app.get('/api/findAllPoll/accessType/:usertype', poll.findAllPollWithAccessType);
 
+  // Retrieve all Polls that has ended
+  app.get('/api/findAllEndedPoll', poll.findAllEndedPoll);
+
   // Update a Poll with pollId
   app.put('/api/updatePoll/:pollId', poll.updatePoll);
 
