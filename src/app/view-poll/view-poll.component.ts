@@ -12,15 +12,17 @@ import { Router } from '@angular/router';
 })
 export class ViewPollComponent implements OnInit {
   polls: Poll[];
-
+  loading: boolean = false;
   constructor(private pollService: PollService,
               private auth: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {
+    this.loading = true;
     this.pollService.getPolls(this.auth.getUserDetails().usertype)
       .subscribe(
       (data) => {
+        this.loading = false;
         this.polls = data;
         console.log(data);
       },

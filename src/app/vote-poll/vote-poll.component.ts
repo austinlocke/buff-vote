@@ -75,14 +75,18 @@ export class VotePollComponent implements OnInit {
     }
 
     console.log(this.pollChoices);
-
+    let message: string;
     this.pollService.vote(this.pollId, this.pollChoices).subscribe(
       (data) => {
         console.log(data);
+        message = "You successfully voted in poll \"" + this.poll.title + "\".";
+        this.sendAlert(AlertType.Success, message, true);
         this.routeNav.navigate(['/homepage']);
       },
       (err) => {
         console.log(err);
+        message = "An error has occurred while voting in the poll \"" + this.poll.title + "\". Please try again later.";
+        this.sendAlert(AlertType.Error, message, true);
         this.routeNav.navigate(['/homepage']);
     });
   }

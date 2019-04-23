@@ -69,6 +69,21 @@
   bottom: 0;
 }
 
+.message {
+  padding-top: 15px;
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+  color: rgb(85, 85, 85);
+}
+
+.spinner {
+  padding-top: 15px;
+  background-color: transparent !important;
+  color: #730A31 !important;
+  text-align: center;
+}
+
 .createContainer {
   margin: 0 auto;
 }

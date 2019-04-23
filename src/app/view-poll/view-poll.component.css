@@ -35,3 +35,10 @@
     position: absolute;
     bottom: 0;
 }
+
+.spinner {
+  padding-top: 50px;
+  background-color: transparent !important;
+  color: #730A31 !important;
+  text-align: center;
+}

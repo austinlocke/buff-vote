@@ -18,6 +18,12 @@
     <div class="createContainer">
       <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="active">
         <h2 id="header"><strong>Active Poll/Election:</strong></h2>
+        <div class="spinner">
+          <span *ngIf="loading" class="spinner-border" role="status" aria-hidden="true"></span>
+        </div>
+        <div *ngIf="!hasActivePolls" class="message">
+            <strong>You have no active polls</strong>
+        </div>
         <div class="row">
           <div *ngFor="let poll of activePolls; index as i" class="col-md-4">
             <div class="pollBox" (click)="navigate(poll)">
@@ -33,6 +39,12 @@
       </div>
       <div [ngClass]="activePage !== 1 ? 'hide' : 'none'" class="ended">
         <h2 id="header"><strong>Ended Poll/Election:</strong></h2>
+        <div class="spinner">
+            <span *ngIf="loading" class="spinner-border" role="status" aria-hidden="true"></span>
+        </div>
+        <div *ngIf="!hasEndedPolls" class="message">
+            <strong>You have no ended polls</strong>
+        </div>
         <div class="row">
           <div *ngFor="let poll of endedPolls; index as j" class="col-md-4">
             <div class="pollBox" (click)="navigate(poll)">
