@@ -18,14 +18,27 @@ exports.createPoll = (req, res) => {
   // Save Poll in the database
   poll.save()
   .then(data => {
-      blockChain.createAsset(data);
+    blockChain.createAsset(data).then( (info) => {
+      console.log("info " + info);
+      console.log("Test in successfully creating asset");
       res.status(200).send({
-          status: 200,
-          message: 'Poll created!',
-          data: data,
+        status: 200,
+        message: 'Poll created!',
+        data: data,
       });
-
+    }, err => {
+      Poll.findByIdAndDelete(data._id)
+      .then( () => {
+        console.log("Poll with id \"" + data._id  + "\" was deleted because of error in creating its assets.");
+      }).catch( err => {
+        console.log("Error while deleting poll with id \"" + data._id  + "\" as a result of an error in creating its assets.");
+      });
+      res.status(500).send({
+        error: "Error occured while creating asset"
+      })
+    })
   }).catch(err => {
+      console.log(err);
       res.status(500).send({
           error: err.message || "Some error occurred while creating the Poll."
       })

@@ -15,16 +15,22 @@ export class ManagePollComponent implements OnInit {
   polls: Poll[];
   activePolls: Poll[] = [];
   endedPolls: Poll[] = [];
+  hasActivePolls = true;
+  hasEndedPolls = true;
   currentDate = Date();
   activePage = 0;
+  loading: boolean = true;
+
   constructor(private pollService: PollService,
               private auth: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {
+    this.loading = true;
     this.pollService.getUserPolls(this.auth.getUserDetails().email)
       .subscribe(
       (data) => {
+        this.loading = false;
         this.polls = data;
         console.log(data);
         this.seperatePolls();
@@ -42,6 +48,14 @@ export class ManagePollComponent implements OnInit {
         this.endedPolls.push(polls);
       }
     });
+
+    if (this.activePolls.length === 0) {
+      this.hasActivePolls = false;
+    }
+    if (this.endedPolls.length === 0) {
+      this.hasEndedPolls = false;
+    }
+
   }
 
   checkDate(isoDate) {

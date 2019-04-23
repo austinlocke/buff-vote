@@ -11,19 +11,33 @@ module.exports = {
     return multichain;
   },
 
-  createAsset: function(poll) {
-
+  createAsset: async function(poll) {
     mc = this.initiateMultichain();
 
+    let awaitPromise = [];
     for(let question of poll.questions) {
       for(let option of question.options) {
-        mc.issue({address: "13ZS6UQYbjwQoU1rCzH4QrVhZm6PYQFtHvNqMM", asset: option._id, qty: 50000, units: 1.00, details: {pollId: poll._id, questionId: question._id}})
-          .catch( err => {
-            console.log("Error:");
-            console.log(err);
-          });
+        awaitPromise.push(new Promise( (resolve, reject) => {
+          mc.issue({address: "13ZS6UQYbjwQoU1rCzH4QrVhZm6PYQFtHvNqMM", asset: option._id, qty: 50000, units: 1.00, details: {pollId: poll._id, questionId: question._id}},
+          (err, res) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(res);
+          })
+        }));
       }
     }
+    // Await for all promises to resolve.
+    await Promise.all(awaitPromise).then( result => {
+      console.log("Successfully created assets for poll id \"" + poll._id + "\"");
+      console.log(result);
+      return Promise.resolve(result);
+    }).catch(err => {
+      console.log("Error while creating assets for poll id \"" + poll._id + "\"");
+      console.log(err);
+      return Promise.reject(err);
+    });
   },
 
   sendAsset: function(assetName) {

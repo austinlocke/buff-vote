@@ -54,6 +54,7 @@ export class CreatePollComponent implements OnInit {
     const endDate = new Date(year, month, day, 23, 59, 59);
     console.log(endDate);
     const poll: Poll = {
+      _id: null,
       title: form.value.pollName,
       owner: this.authService.getUserDetails().email,
       access_type: {

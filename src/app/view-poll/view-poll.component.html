@@ -1,5 +1,8 @@
 <app-dashboard></app-dashboard>
 <div class="container">
+  <div class="spinner">
+      <span *ngIf="loading" class="spinner-border" role="status" aria-hidden="true"></span>
+  </div>
   <div class="row">
     <div *ngFor="let poll of polls; index as i" class="col-md-4">
       <div class="pollBox" (click)="navigate(poll)">
