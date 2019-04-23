@@ -61,30 +61,65 @@ exports.votePoll = (req, res) => {
 }
 
 exports.pollResult = (req, res) => {
-  Poll.findById(req.params.pollId)
+  pollId = req.params.pollId;
+  Poll.findById(pollId)
   .then(poll => {
       if(!poll) {
           res.status(404).send({
-              message: "Error: Poll not found with id " + req.params.pollId
+              message: "Error: Poll not found with id " + pollId
           });
       }
-      //console.log(poll);
-      // for(let question of poll.questions) {
-      //   console.log(question.questionTitle);
-      //   //for (let option of poll.questions.options) {
-      //     console.log(question._id + " " + option._id);
-      //     // blockChain.getAssetBalance("test").then( (result) => {
-      //     //   console.log(result);
-      //     // });
-      //   //}
-      // }
 
-      blockChain.getAssetBalance(poll).then( (result) => {
-        console.log(result);
-      });
+      // if poll has not ended yet, just return poll
+      // else return poll with results
+      if( new Date(poll.end_date) >= new Date()  ) {
+        console.log('Successfully retrieved active poll with id "' + pollId + '"');
+        res.status(200).send(poll);
+      }
+      else {
 
+        blockChain.getAssetBalance(poll).then( (assets) => {
 
-      res.send(poll);
+          results = {
+            _id: poll._id,
+            title: poll.title,
+            owner: poll.owner,
+            access_type: {
+              student: poll.access_type.student,
+              faculty: poll.access_type.faculty,
+              instructor: poll.access_type.instructor
+            },
+            questions: [],
+            date_created: poll.date_created,
+            end_date: poll.end_date,
+          }
+
+          for(let question of poll.questions) {
+            let tempOption = [];
+            for(let option of question.options) {
+              let asset = assets.total.find( resultId => {
+                return resultId.name == option._id
+              });
+              if(asset) {
+                tempOption.push({_id: option._id, option: option.option, qty: asset.qty});
+              }
+            }
+            results.questions.push({questionTitle: question.questionTitle, options: tempOption});
+          }
+          res.status(200).send(results);
+        }, err => {
+          console.log('Error with retrieving votes form assets in Poll with id "' + pollId + '"');
+          //console.log(err);
+          res.status(500).send({
+            error: 'Error with retrieving votes form assets in Poll with id "' + pollId + '"'
+          })
+        }).catch(err => {
+          console.log(err);
+          res.status(500).send({
+            error: 'Error with retrieving votes form assets in Poll with id "' + pollId + '"'
+          })
+        });
+      }
   }).catch(err => {
       res.status(500).send({
           message: "Error: Could not retrieve poll with id " + req.params.pollId,

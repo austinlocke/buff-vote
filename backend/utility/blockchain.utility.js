@@ -1,5 +1,6 @@
 module.exports = {
 
+  // Create a connection to Multichain
   initiateMultichain: function() {
     // Change password, located in /root/.multichain/medium-demo-multichain/multichain.conf
     let multichain = require("multichain-node")({
@@ -11,6 +12,9 @@ module.exports = {
     return multichain;
   },
 
+  // Create multiple assets for each poll option
+  // Input: Poll object
+  // Return: Promise with results or error
   createAsset: async function(poll) {
     mc = this.initiateMultichain();
 
@@ -23,7 +27,9 @@ module.exports = {
             if (err) {
               reject(err);
             }
-            resolve(res);
+            else {
+              resolve(res);
+            }
           })
         }));
       }
@@ -39,6 +45,9 @@ module.exports = {
     });
   },
 
+  // Increase each asset the user choiced to vote for
+  // Input: Array of Choices object {pollId, optionId, questionId}
+  // Return: Promise with results or error
   sendAsset: async function(choices) {
     mc = this.initiateMultichain();
 
@@ -51,7 +60,9 @@ module.exports = {
           if (err) {
             reject(err);
           }
-          resolve(res);
+          else {
+            resolve(res);
+          }
         })
       }));
     }
@@ -67,25 +78,39 @@ module.exports = {
     });
   },
 
+  // Get multiple assets for all options in a Poll
+  // Input: Poll object
+  // Return: Promise with results or error
+  //         The result will contain an array of Objects with
+  //         { name:, assetref:, qty:}.
   getAssetBalance: async function(poll) {
     mc = this.initiateMultichain();
 
-    assetName = [];
+    assetNames = [];
 
     for(let question of poll.questions) {
       for(let option of question.options) {
-        assetName.push(option._id);
+        assetNames.push(option._id);
       }
     }
-    console.log(assetName);
-    result = await mc.getMultiBalances({
-      addresses: "1LcyUTRsSDSKsaLNBJkZcVxFNEjVTGzgkkbtMb",
-      assets: assetName
+
+    return new Promise((resolve, reject) => {
+      mc.getMultiBalances({
+        addresses: "1LcyUTRsSDSKsaLNBJkZcVxFNEjVTGzgkkbtMb",
+        assets: assetNames
+      },
+      (err, res) => {
+        if (err) {
+          console.log("Error while retrieving votes from assets for poll id \"" + poll._id + "\"");
+          console.log(err);
+          reject(err);
+        }
+        else {
+          console.log("Successfully retrieved votes from assets for poll id \"" + poll._id + "\"")
+          resolve(res);
+        }
+      })
     });
-
-    console.log(result);
-
-    //return result;
   }
 
 }

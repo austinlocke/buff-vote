@@ -51,6 +51,10 @@ export class PollService {
     return this.request('get', 'findOnePoll', path);
   }
 
+  public getPollResult(pollId: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/pollResult/${pollId}`);
+  }
+
   public vote(pollId: string, pollChoices: object) {
     return this.http.post(`http://localhost:3000/api/votePoll/${pollId}`, pollChoices);
   }

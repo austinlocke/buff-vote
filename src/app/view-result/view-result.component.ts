@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PollService } from '../services/poll.service';
-import { Poll } from '../models/poll.model';
+import { Poll, PollResults } from '../models/poll.model';
 import { AuthenticationService } from '../services/authentication.service';
 import { AlertService } from '../services/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./view-result.component.css']
 })
 export class ViewResultComponent implements OnInit {
-  poll: Poll;
+  poll: PollResults;
   pollId;
   choices = {};
   activePage = 0;
@@ -24,7 +24,7 @@ export class ViewResultComponent implements OnInit {
 
   ngOnInit() {
     this.pollId = this.router.snapshot.params['poll_id'];
-    this.pollService.getPoll(this.pollId)
+    this.pollService.getPollResult(this.pollId)
       .subscribe(
       (data) => {
         this.poll = data;
@@ -36,6 +36,7 @@ export class ViewResultComponent implements OnInit {
           this.routeNav.navigate(['manage-polls']);
         }
         console.log(data);
+
       },
       (err) => {
         console.log(err);
