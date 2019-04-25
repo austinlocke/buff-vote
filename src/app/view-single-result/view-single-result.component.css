@@ -51,3 +51,8 @@
     color: white !important;
     background-color: #730A31 !important;
 }
+
+.quantity {
+    padding-right: 5px;
+    float: right;
+}

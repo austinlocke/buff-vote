@@ -28,25 +28,27 @@ export class ViewSingleResultComponent implements OnInit {
   ngOnInit() {
     let message;
     this.pollId = this.route.snapshot.params['poll_id'];
-    this.pollService.getPoll(this.pollId).subscribe(
+    this.pollService.getPollResult(this.pollId).subscribe(
       (data) => {
         this.poll = data;
+        console.log(this.poll)
         // Check if user accessType matches poll access type
         if ( ! this.hasAccessType(this.authService.getUserDetails().usertype) ) {
           message = "Error: You do not have access to vote in the poll with ID: " + this.pollId;
           this.sendAlert(AlertType.Error, message, true);
-          this.routeNav.navigate(['view-polls']);
+          this.routeNav.navigate(['poll-results']);
         }
       },
       (err) => {
         message = 'Error: The poll with ID "' + this.pollId + '" does not exists.';
         this.sendAlert(AlertType.Error, message, true);
-        this.routeNav.navigate(['view-polls']);
+        this.routeNav.navigate(['poll-results']);
       });
   }
 
   hasAccessType(usertype: String): boolean {
     let hasAccess = false;
+    console.log(`${usertype} ${this.poll.access_type.student} ${this.poll.access_type.faculty} ${this.poll.access_type.instructor}`)
     switch (true) {
       case (this.poll.access_type.student && usertype === "Student"):
         hasAccess = true;

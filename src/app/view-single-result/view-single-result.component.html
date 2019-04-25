@@ -6,7 +6,7 @@
       <br>
       <div *ngFor="let question of poll.questions; index as i">
         <h5 class="qTitle">{{question.questionTitle}}</h5>
-        <p *ngFor="let option of question.options; index as j" class="option">{{ option.option }}</p>
+        <p *ngFor="let option of question.options; index as j" class="option">{{ option.option }} - <span class="quantity"> {{ option.qty }}</span></p>
       </div>
     </div>
   </div>

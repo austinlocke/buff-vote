@@ -17,11 +17,10 @@ export class PollResultsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.pollService.getPolls(this.auth.getUserDetails().usertype)
+    this.pollService.getEndedPolls()
       .subscribe(
       (data) => {
         this.polls = data;
-        console.log(data);
       },
       (err) => {
         console.log(err);

@@ -41,6 +41,10 @@ export class PollService {
     return this.request('get', 'findAllPoll', path, null);
   }
 
+  public getEndedPolls(): Observable<any> {
+    return this.http.get(`http://localhost:3000/api/findAllEndedPoll`);
+  }
+
   public getUserPolls(email: string): Observable<any> {
     const path = '/owner/' + email;
     return this.request('get', 'findAllPoll', path);
