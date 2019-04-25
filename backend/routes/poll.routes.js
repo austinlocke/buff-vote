@@ -7,6 +7,7 @@ module.exports = (app) => {
   // Vote in a poll
   app.post('/api/votePoll/:pollId', poll.votePoll);
 
+  // Retrieve a single poll with pollId and if ended, returns with results
   app.get('/api/pollResult/:pollId', poll.pollResult);
 
   // Retrieve a single poll with pollId
