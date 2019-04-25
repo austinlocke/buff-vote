@@ -20,7 +20,7 @@
       <form [formGroup]="pollForm">
         <div [ngClass]="activePage !== 0 ? 'hide' : 'none'" class="page1">
           <div class="form-group">
-            <input formControlName="pollName" type="text" class="form-control" placeholder="Enter Poll Name">
+            <input formControlName="pollName" type="text" class="form-control" placeholder="Enter Poll Name" required>
           </div>
           <div class="form-group accessText">
             <span class="smallText">Access to poll: </span>
@@ -55,13 +55,13 @@
             *ngFor="let question of pollForm.get('questions').controls; let i = index;">
             <div [formGroupName]="i">
               <div class="form-group">
-                <input class="form-control" type="text" formControlName="questionTitle" placeholder="Enter Question">
+                <input class="form-control" type="text" formControlName="questionTitle" placeholder="Enter Question" required>
               </div>
               <div class="form-group" formArrayName="options"
                 *ngFor="let op of question.controls.options.controls; let j = index;">
                 <div class="form-group">
                   <div [formGroupName]="j">
-                    <input class="form-control" type="text" formControlName="option" placeholder="Enter Option {{j+1}}">
+                    <input class="form-control" type="text" formControlName="option" placeholder="Enter Option {{j+1}}" required>
                   </div>
                 </div>
               </div>
