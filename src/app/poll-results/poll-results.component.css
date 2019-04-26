@@ -4,6 +4,10 @@
     font-family: 'Roboto', 'sans-serif' !important;
 }
 
+.myContainer {
+    padding-top: 15px;
+}
+
 .pollBox {
     padding-top: 15px;
     width: 100%;
@@ -34,4 +38,13 @@
     font-size: 0.7em;
     position: absolute;
     bottom: 0;
+}
+
+#title {
+    padding-top: 15px;
+    width: 100%;
+    font-style: italic;
+    font-size: 3em;
+    text-align: center;
+    color: rgb(85, 85, 85);
 }
