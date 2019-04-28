@@ -43,6 +43,14 @@
     bottom: 0;
 }
 
+.message {
+  padding-top: 15px;
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+  color: rgb(85, 85, 85);
+}
+
 .spinner {
   padding-top: 50px;
   background-color: transparent !important;

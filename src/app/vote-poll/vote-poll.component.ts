@@ -7,6 +7,7 @@ import { Alert, AlertType } from '../models/alert.model';
 import { AuthenticationService } from '../services/authentication.service';
 
 export interface PollChoices {
+  userId: String;
   pollId: String;
   questionId: String;
   optionId: String;
@@ -37,6 +38,14 @@ export class VotePollComponent implements OnInit {
     this.pollService.getPoll(this.pollId).subscribe(
       (data) => {
         this.poll = data;
+        console.log(this.poll);
+        const userId: string = this.authService.getUserDetails()._id || "";
+        // Check if user has already voted
+        if (this.poll.usersVoted.indexOf(userId) >= 0) {
+          message = "Error: You have already voted in the poll \"" + this.poll.title + "\"";
+          this.sendAlert(AlertType.Error, message, true);
+          this.routeNav.navigate(['view-polls']);
+        }
         // Check if user accessType matches poll access type
         if ( ! this.hasAccessType(this.authService.getUserDetails().usertype) ) {
           message = "Error: You do not have access to vote in the poll with ID: " + this.pollId;
@@ -68,6 +77,7 @@ export class VotePollComponent implements OnInit {
     console.log(this.choices);
     for (let i = 0; i < this.poll.questions.length; i++ ) {
       this.pollChoices[i] = {
+        userId: this.authService.getUserDetails()._id,
         pollId: this.poll._id,
         questionId: this.poll.questions[i]._id,
         optionId: this.poll.questions[i].options[this.choices[i]]._id
@@ -85,7 +95,11 @@ export class VotePollComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-        message = "An error has occurred while voting in the poll \"" + this.poll.title + "\". Please try again later.";
+        if (err.error.reason === "Already Voted") {
+          message = "You have already voted in the poll \"" + this.poll.title + "\"";
+        } else {
+          message = "An error has occurred while voting in the poll \"" + this.poll.title + "\". Please try again later.";
+        }
         this.sendAlert(AlertType.Error, message, true);
         this.routeNav.navigate(['/homepage']);
     });

@@ -63,6 +63,7 @@ export class CreatePollComponent implements OnInit {
         instructor: form.value.instructorAccess || false
       },
       questions: form.value.questions,
+      usersVoted: [],
       date_created: currentDate,
       end_date: endDate
     };

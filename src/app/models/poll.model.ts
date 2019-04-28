@@ -15,6 +15,7 @@ export interface Poll {
       option: String
     }]
   }];
+  usersVoted: [];
   date_created: Date;
   end_date: Date;
 }
@@ -37,6 +38,7 @@ export interface PollResults {
       qty: Number
     }]
   }];
+  usersVoted: [];
   date_created: Date;
   end_date: Date;
 }

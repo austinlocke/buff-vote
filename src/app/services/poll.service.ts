@@ -36,8 +36,8 @@ export class PollService {
     return this.request('post', 'createPoll', null, poll);
   }
 
-  public getPolls(accessType: string): Observable<any> {
-    const path = '/accessType/' + accessType;
+  public getPolls(userId: string, accessType: string): Observable<any> {
+    const path = '/' + userId + '/' + accessType;
     return this.request('get', 'findAllPoll', path, null);
   }
 

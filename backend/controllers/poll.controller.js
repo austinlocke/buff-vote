@@ -11,6 +11,7 @@ exports.createPoll = (req, res) => {
         instructor: req.body.access_type.instructor || false
       },
       questions: req.body.questions,
+      usersVoted: [],
       date_created: req.body.date_created,
       end_date: req.body.end_date,
   });
@@ -46,13 +47,35 @@ exports.createPoll = (req, res) => {
 exports.votePoll = (req, res) => {
   choices = req.body;
   pollId = choices[0].pollId;
-  blockChain.sendAsset(choices).then( (info) => {
-    res.status(200).send({
-      status: 200,
-      message: 'Successfully Voted!',
-    });
-  }, err => {
-    console.log("Error with voting in Poll with id \"" + pollId + "\"");
+  userId = choices[0].userId;
+  // Check if user has already voted
+  Poll.find({_id: pollId}, { usersVoted: { $elemMatch: { $in: userId }}} )
+  .then( (data) => {
+    if (data[0].usersVoted.length) {
+      console.log("User already voted for Poll with id \"" + pollId + "\"");
+      res.status(403).send({
+        error: "User already voted for Poll with id \"" + pollId + "\"",
+        reason: "Already Voted"
+      })
+    }
+    else {
+      blockChain.sendAsset(choices).then( (info) => {
+        Poll.findByIdAndUpdate(pollId, { $addToSet: { usersVoted: userId } })
+        .then( () => {
+          res.status(200).send({
+            status: 200,
+            message: 'Successfully Voted!',
+          });
+        })
+      }, err => {
+        console.log("Error with voting in Poll with id \"" + pollId + "\"");
+        console.log(err);
+        res.status(500).send({
+          error: "Error with voting in poll with id \"" + pollId + "\""
+        })
+      })
+    }
+  }).catch( (err) => {
     console.log(err);
     res.status(500).send({
       error: "Error with voting in poll with id \"" + pollId + "\""
@@ -189,12 +212,15 @@ exports.findAllPollWithAccessType = (req, res) =>  {
       field = "access_type.instructor";
       break;
   }
-  Poll.find( { [field]: true, "end_date": {$gte: new Date() }  }
+  userId = req.params.userId;
+  // Find documents with userType, that has not ended yet, and user has not voted in
+  Poll.find( { [field]: true, "end_date": {$gte: new Date() }, "usersVoted": { $nin: [userId] } }
   ).sort( {end_date: -1, date_created: 1} ).then(polls => {
     res.status(200).send(polls);
   }).catch(err => {
     res.status(500).send({
-      message: "Error occurred while retrieving Poll with " + req.body
+      message: "Error occurred while retrieving Poll with " + req.body,
+      error: err
     })
   })
 }

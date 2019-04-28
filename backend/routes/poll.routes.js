@@ -20,7 +20,7 @@ module.exports = (app) => {
   app.get('/api/findAllPoll/owner/:owner', poll.findAllPollWithOwner);
 
   // Retrieve all Polls with a user type
-  app.get('/api/findAllPoll/accessType/:usertype', poll.findAllPollWithAccessType);
+  app.get('/api/findAllPoll/:userId/:usertype', poll.findAllPollWithAccessType);
 
   // Retrieve all Polls that has ended
   app.get('/api/findAllEndedPoll', poll.findAllEndedPoll);

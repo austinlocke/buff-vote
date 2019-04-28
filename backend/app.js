@@ -30,6 +30,9 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
