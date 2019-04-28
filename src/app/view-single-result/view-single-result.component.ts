@@ -34,7 +34,7 @@ export class ViewSingleResultComponent implements OnInit {
         console.log(this.poll)
         // Check if user accessType matches poll access type
         if ( ! this.hasAccessType(this.authService.getUserDetails().usertype) ) {
-          message = "Error: You do not have access to vote in the poll with ID: " + this.pollId;
+          message = "Error: You do not have access to view the poll with ID: " + this.pollId;
           this.sendAlert(AlertType.Error, message, true);
           this.routeNav.navigate(['poll-results']);
         }
@@ -85,5 +85,14 @@ export class ViewSingleResultComponent implements OnInit {
         this.alertService.success(message, keepAfterRouteChange);
         break;
     }
+  }
+
+  max(question, option) {
+    let maxOp = question.options[0];
+    question.options.forEach(option => {
+      maxOp = option.qty > maxOp.qty ? option : maxOp;
+    });
+    let maxQuant = maxOp.qty;
+    return option.qty === maxQuant
   }
 }
