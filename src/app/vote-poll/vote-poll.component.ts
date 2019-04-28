@@ -39,9 +39,12 @@ export class VotePollComponent implements OnInit {
       (data) => {
         this.poll = data;
         console.log(this.poll);
-        const userId: string = this.authService.getUserDetails()._id || "";
+        const userId: string = "" || this.authService.getUserDetails()._id ;
         // Check if user has already voted
-        if (this.poll.usersVoted.indexOf(userId) >= 0) {
+        if (this.poll.usersVoted.findIndex( (search: string) => {
+          console.log(search);
+          return search === userId;
+        }) >= 0) {
           message = "Error: You have already voted in the poll \"" + this.poll.title + "\"";
           this.sendAlert(AlertType.Error, message, true);
           this.routeNav.navigate(['view-polls']);
