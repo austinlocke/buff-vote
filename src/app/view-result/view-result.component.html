@@ -51,7 +51,14 @@
           <h2 id="header2"> Please check after {{formatDate(poll.end_date)}}. </h2>
         </div>
         <div *ngIf="!checkDate(poll.end_date)" >
-            <h2 id="header2"> Phht. The results have not been implemented :) </h2>
+          <div *ngIf="poll">
+            <h1 class="title">{{ poll.title }}</h1>
+            <br>
+            <div *ngFor="let question of poll.questions; index as i">
+              <h5 class="qTitle">{{question.questionTitle}}</h5>
+              <p *ngFor="let option of question.options; index as j" [ngClass]="max(question, option) ? 'winner' : 'resultOption'">{{ option.option }} <span class="quantity"> {{ option.qty }}</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

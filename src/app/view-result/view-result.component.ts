@@ -72,4 +72,13 @@ export class ViewResultComponent implements OnInit {
     return this.poll.access_type.instructor ? "yes" : "no";
   }
 
+  max(question, option) {
+    let maxOp = question.options[0];
+    question.options.forEach(option => {
+      maxOp = option.qty > maxOp.qty ? option : maxOp;
+    });
+    let maxQuant = maxOp.qty;
+    return option.qty === maxQuant
+  }
+
 }
