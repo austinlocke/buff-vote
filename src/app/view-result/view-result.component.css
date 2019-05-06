@@ -112,4 +112,33 @@
   line-height: 35px;
 }
 
+.winner {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 50%;
+  background-color: #730A31;
+  color: white;
+  border: solid 1px white;
+  border-radius: 5px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}
 
+.resultOption {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 50%;
+  background-color: white;
+  color: #730A31;
+  border: solid 1px white;
+  border-radius: 5px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.quantity {
+  padding-right: 5px;
+  float: right;
+}
