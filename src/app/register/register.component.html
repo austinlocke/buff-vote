@@ -18,7 +18,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="fname">First Name</label>
-          <input type="text" class="form-control" name="fname" placeholder="First Name" ngModel #fname="ngModel" required>
+          <input type="text" class="form-control" name="fname" placeholder="First Name" ngModel #fname="ngModel" id="fname-selector" required>
           <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
             <div *ngIf="fname.errors.required">
               First name is required
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="lname">Last Name</label>
-          <input type="text" class="form-control" name="lname" placeholder="Last Name" ngModel #lname="ngModel" required>
+          <input type="text" class="form-control" name="lname" placeholder="Last Name" ngModel #lname="ngModel" id="lname-selector" required>
           <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
             <div *ngIf="lname.errors.required">
               Last name is required
@@ -38,7 +38,7 @@
       <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" required email appValidateEmail>
+        <input type="email" class="form-control" name="email" placeholder="Email" ngModel #email="ngModel" id="email-selector" required email appValidateEmail>
         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
           <div *ngIf="email.errors.required">
             Email is required
@@ -53,7 +53,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required
+        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" id="password-selector" required
           [pattern]=passwordPattern>
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
           <div *ngIf="password.errors.required">
@@ -66,7 +66,7 @@
       </div>
       <div class="form-group col-md-4">
           <label for="confirmpass">Confirm Password</label>
-          <input type="password" class="form-control" name="confirmpass" placeholder="Confirm Password" ngModel #confpass="ngModel" required appValidatePasswordsMatch="{{password.value}}">
+          <input type="password" class="form-control" name="confirmpass" placeholder="Confirm Password" ngModel #confpass="ngModel" id="confirm-pass-selector" required appValidatePasswordsMatch="{{password.value}}">
           <div *ngIf="confpass.invalid && (confpass.dirty || confpass.touched)" class="alert alert-danger">
             <div *ngIf="confpass.errors.required">
               Must confirm password
@@ -79,7 +79,7 @@
       </div>
       <div class="form-group">
         <label for="department">College Department</label>
-        <select name="department" class="form-control" ngModel #department="ngModel" required>
+        <select name="department" class="form-control" ngModel #department="ngModel" id="college-selector" required>
             <option value="" disabled selected>Select your department</option>
             <option value="1">Paul Engler College of Agriculture and Natural Sciences</option>
             <option value="2">Paul and Virginia Engler College of Business</option>
@@ -98,7 +98,7 @@
       </div>
       <div class="form-group">
           <label for="major">College Major</label>
-          <input type="text" class="form-control" name="major" placeholder="Major (ex. Computer Science)" ngModel #major="ngModel" required>
+          <input type="text" class="form-control" name="major" placeholder="Major (ex. Computer Science)" ngModel #major="ngModel" id="major-selector" required>
           <div *ngIf="major.invalid && (major.dirty || major.touched)" class="alert alert-danger">
             <div *ngIf="major.errors.required">
               Major is required
@@ -108,7 +108,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="city">City</label>
-          <input type="text" class="form-control" name="city" placeholder="City" ngModel #city="ngModel" required>
+          <input type="text" class="form-control" name="city" placeholder="City" ngModel #city="ngModel" id="city-selector" required>
           <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
             <div *ngIf="city.errors.required">
               City is required
@@ -117,7 +117,7 @@
         </div>
         <div class="form-group col-md-4">
           <label for="state">State</label>
-          <select name="state" class="form-control" ngModel #state="ngModel" required>
+          <select name="state" class="form-control" ngModel #state="ngModel" id="state-selector" required>
             <option value="" disabled selected>Select your state</option>
             <option selected>Choose...</option>
             <option value="AL">Alabama</option>
@@ -180,7 +180,7 @@
         </div>
         <div class="form-group col-md-2">
           <label for="zip">Zip</label>
-          <input type="text" class="form-control" name="zip" ngModel #zip="ngModel" required placeholder="Zip Code" pattern="[0-9]{5}">
+          <input type="text" class="form-control" name="zip" ngModel #zip="ngModel" id="zip-selector" required placeholder="Zip Code" pattern="[0-9]{5}">
           <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
             <div *ngIf="zip.errors.required">
               Zip is required
@@ -194,7 +194,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="usertype">User Type</label>
-          <select name="usertype" class="form-control" ngModel #usertype="ngModel" required>
+          <select name="usertype" class="form-control" ngModel #usertype="ngModel" id="user-selector" required>
             <option value="" disabled selected>Select your User Type</option>
             <option>Student</option>
             <option>Instructor</option>
@@ -208,7 +208,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="classification">Classification</label>
-          <select name="classification" class="form-control" ngModel #classification="ngModel" required>
+          <select name="classification" class="form-control" ngModel #classification="ngModel" id="classification-selector" required>
             <option value="" disabled selected>Select your Classification</option>
             <option>Freshman</option>
             <option>Sophomore</option>
@@ -226,7 +226,7 @@
       </div>
       <div *ngIf="registerForm.invalid && (registerForm.dirty || registerForm.touched)" class="alert alert-danger">Please fix the form before submitting.</div>
       <div *ngIf="nodeErrors.duplicateEmailError" class="alert alert-danger">The WTAMU email provided is currently in use.</div>
-      <button type="submit" class="btn" [disabled]="registerForm.invalid">Register</button>
+      <button type="submit" class="btn" [disabled]="registerForm.invalid" id="submit-form-btn">Register</button>
     </form>
   </div>
 </div>
